@@ -360,7 +360,7 @@ footer p{font-size:.8rem;color:var(--sabbia);letter-spacing:.06em}
     <div class="sec-head">
       <p class="sec-eyebrow">Menyen vår</p>
       <h2>Fra ovnen på Sofienberg</h2>
-      <p>Over 35 pizzaer og calzoner – klassikere fra Roma og favoritter med norsk vri.</p>
+      <p>30 pizzaer og calzoner, salater, barnemeny og desserter – klassikere fra Roma og favoritter med norsk vri.</p>
     </div>
 
     <div class="menu-card">
@@ -378,7 +378,7 @@ footer p{font-size:.8rem;color:var(--sabbia);letter-spacing:.06em}
 
       <div class="menu-grid" id="menuGrid" aria-live="polite"></div>
 
-      <p class="menu-note">Spørsmål om allergener? Spør oss – vi hjelper deg gjerne. Retter merket med allergen inneholder nøtter eller egg.</p>
+      <p class="menu-note">Alle pizzabunner inneholder melk, hvetemel og egg – glutenfri bunn kan velges (+60 kr). Alle pizzaer har norvegia- og mozzarellaost. Alle salater serveres med brød og husets hvitløksdressing. Spørsmål om allergener? Spør oss – vi hjelper deg gjerne.</p>
     </div>
   </div>
 </section>
@@ -473,61 +473,102 @@ footer p{font-size:.8rem;color:var(--sabbia);letter-spacing:.06em}
 
 <script>
 /* =========================================================
-   MENYDATA – DETTE ER ALT SOM TRENGS FOR Å ADMINISTRERE MENYEN
+   MENYADMINISTRASJON VIA GOOGLE SHEETS (for restauranten)
    ---------------------------------------------------------
-   Slik legger du til en rett:
-     { navn: "Tiramisu", pris: 95, beskrivelse: "hjemmelaget, med espresso" }
+   Restauranten oppdaterer menyen selv i et vanlig regneark:
 
+   1. Opprett et Google Sheet med kolonnene (rad 1, nøyaktig disse navnene):
+        Kategori | Navn | Pris | Beskrivelse | Merk
+      Eksempelrad:
+        Pizza | 1. Margherita | 189 | tomatsaus, ost, fersk oregano | Anbefalt
+      Flere merker skilles med semikolon: Anbefalt; Inneholder nøtter
+
+   2. I regnearket: Fil → Del → Publiser på nettet →
+      velg arket → format «Kommaseparerte verdier (.csv)» → Publiser.
+      Kopier lenken.
+
+   3. Lim inn lenken mellom anførselstegnene under.
+      Står den tom, brukes reservemenyen lenger ned i filen.
+
+   Endringer i regnearket vises på siden innen ca. 5 minutter
+   (Googles publiseringsbuffer). Rader uten Kategori, Navn eller
+   gyldig Pris hoppes over – et stavefeil kan aldri knekke siden.
+   ========================================================= */
+const SHEET_CSV_URL = "";
+
+/* =========================================================
+   RESERVEMENY – brukes når SHEET_CSV_URL står tom eller
+   regnearket ikke kan lastes. Slik legger du til en rett:
+     { navn: "Tiramisu", pris: 95, beskrivelse: "hjemmelaget, med espresso" }
    Valgfritt felt:  merk: ["Anbefalt"]  eller  merk: ["Inneholder nøtter"]
    Tomme kategorier vises ikke på siden før de får innhold.
-   Endre pris? Bare endre tallet. Fjerne en rett? Slett linjen.
    ========================================================= */
 const MENY = {
   "Pizza": [
-    { navn: "Margherita", pris: 149, beskrivelse: "tomatsaus, mozzarella, fersk oregano" },
-    { navn: "Vesuvio", pris: 179, beskrivelse: "tomatsaus, mozzarella, skinke" },
-    { navn: "Hawaii", pris: 179, beskrivelse: "tomatsaus, mozzarella, skinke, ananas" },
-    { navn: "Capricciosa", pris: 179, beskrivelse: "tomatsaus, mozzarella, skinke, champignon, fersk oregano" },
-    { navn: "Contandina", pris: 179, beskrivelse: "tomatsaus, mozzarella, aubergine, asparges, paprika, champignon, oliven" },
-    { navn: "Tropicale", pris: 179, beskrivelse: "tomatsaus, mozzarella, pepperoni, paprika, ananas" },
-    { navn: "Calabrisella", pris: 179, beskrivelse: "tomatsaus, mozzarella, salami, hvitløk, aubergine, oliven" },
-    { navn: "Calzone Classic", pris: 179, beskrivelse: "innbakt · tomatsaus, mozzarella, skinke, løk" },
-    { navn: "Calzone Favorita", pris: 179, beskrivelse: "innbakt · tomatsaus, mozzarella, pepperoni, hvitløk, chili, champignon" },
-    { navn: "Calzone Di Roma", pris: 179, beskrivelse: "innbakt · tomatsaus, mozzarella, salami, hvitløk, chili, paprika" },
-    { navn: "Marinara", pris: 189, beskrivelse: "tomatsaus, mozzarella, reker, ansjos, oliven, hvitløk" },
-    { navn: "La Bussola", pris: 189, beskrivelse: "crème fraîche, mozzarella, reker, asparges, paprika, oliven" },
-    { navn: "Siciliana", pris: 189, beskrivelse: "crème fraîche, mozzarella, soltørkede tomater, skinke, oliven" },
-    { navn: "Amore", pris: 189, beskrivelse: "crème fraîche, mozzarella, marinert biff, soltørkede tomater, oliven" },
-    { navn: "Di Roma", pris: 189, beskrivelse: "crème fraîche, mozzarella, pepperoni, soltørkede tomater, ananas", merk: ["Anbefalt"] },
-    { navn: "Provencale", pris: 189, beskrivelse: "tomatsaus, mozzarella, marinert biff, løk, paprika, ruccola" },
-    { navn: "Napoletana", pris: 189, beskrivelse: "tomatsaus, mozzarella, ansjos, kapers, fersk oregano" },
-    { navn: "Vegetar", pris: 189, beskrivelse: "tomatsaus, mozzarella, champignon, løk, paprika, ananas, fetaost" },
-    { navn: "Quatro Stagioni", pris: 199, beskrivelse: "tomatsaus, mozzarella, skinke, artisjokk, champignon, reker" },
-    { navn: "La Bomba", pris: 199, beskrivelse: "tomatsaus, mozzarella, pepperoni, hvitløk, chili, kapers", merk: ["Anbefalt"] },
-    { navn: "Mafiosa", pris: 199, beskrivelse: "tomatsaus, mozzarella, marinert biff, paprika, løk, champignon" },
-    { navn: "Ferarri", pris: 199, beskrivelse: "tomatsaus, mozzarella, skinke, marinert biff, hvitløk, paprika, ruccola" },
-    { navn: "Mama Mia", pris: 199, beskrivelse: "tomatsaus, mozzarella, pestokylling, pepperoni, champignon, soltørkede tomater, ruccola", merk: ["Inneholder nøtter"] },
-    { navn: "Pizza Pollo", pris: 199, beskrivelse: "tomatsaus, mozzarella, pestokylling, løk, paprika, ruccola", merk: ["Inneholder nøtter"] },
-    { navn: "Pollo Bella", pris: 199, beskrivelse: "crème fraîche, mozzarella, pestokylling, paprika, ananas, soltørkede tomater", merk: ["Anbefalt"] },
-    { navn: "Pollo Di Roma", pris: 199, beskrivelse: "tomatsaus, mozzarella, pestokylling, oliven, ruccola" },
-    { navn: "Di Roma Favorita", pris: 199, beskrivelse: "tomatsaus, mozzarella, hvitløk, oliven, soltørkede tomater, ruccola, ½ pestokylling, ½ marinert biff", merk: ["Anbefalt"] },
-    { navn: "Cacciatore", pris: 199, beskrivelse: "tomatsaus, mozzarella, salami, bacon, chili, hvitløk" },
-    { navn: "Italiana", pris: 199, beskrivelse: "tomatsaus, crème fraîche, gorgonzola, hakkede valnøtter", merk: ["Inneholder nøtter"] },
-    { navn: "Casa Mia", pris: 199, beskrivelse: "crème fraîche, mozzarella, parmaskinke, gorgonzola, valnøtter, parmesan, ruccola", merk: ["Inneholder nøtter"] },
-    { navn: "Bakerens spesial", pris: 199, beskrivelse: "tomatsaus, mozzarella, champignon, løk, marinert biff, bearnaisesaus", merk: ["Inneholder egg"] },
-    { navn: "Roma spesial", pris: 199, beskrivelse: "tomatsaus, mozzarella, skinke, champignon, løk, biff, salami" },
-    { navn: "Eldorado", pris: 199, beskrivelse: "tomatsaus, mozzarella, løk, paprika, biff, salami, bearnaisesaus", merk: ["Inneholder egg"] },
-    { navn: "Gorgonzola", pris: 199, beskrivelse: "tomatsaus, mozzarella, gorgonzola, ananas, biff, valnøtter, bearnaisesaus", merk: ["Inneholder nøtter"] },
-    { navn: "Quattro Formaggi", pris: 199, beskrivelse: "tomatsaus eller crème fraîche, mozzarella, gorgonzola, fersk mozzarella, parmesan" },
-    { navn: "Dønner Pizza", pris: 199, beskrivelse: "tomatsaus, mozzarella, dønner, løk, champignon, ruccola og dressing" },
-    { navn: "Tacopizza", pris: 199, beskrivelse: "tomatsaus, mozzarella, tacokjøttdeig, nachos, mais, løk og paprika" }
+    { navn: "1. Margherita", pris: 189, beskrivelse: "tomatsaus, ost, fersk oregano" },
+    { navn: "2. Capricciosa", pris: 219, beskrivelse: "tomatsaus, ost, skinke, champignon, fersk oregano" },
+    { navn: "3. Contandina", pris: 219, beskrivelse: "tomatsaus, ost, aubergine, asparges, paprika, champignon, oliven" },
+    { navn: "4. Tropicale", pris: 219, beskrivelse: "tomatsaus, ost, pepperoni, paprika, ananas" },
+    { navn: "5. Calzone Classic", pris: 219, beskrivelse: "innbakt · tomatsaus, ost, skinke, løk" },
+    { navn: "6. Calzone Favorita", pris: 219, beskrivelse: "innbakt · tomatsaus, ost, pepperoni, hvitløk, chili, champignon" },
+    { navn: "7. Calzone Di Roma", pris: 219, beskrivelse: "innbakt · tomatsaus, ost, salami, hvitløk, chili, paprika" },
+    { navn: "8. Marinara", pris: 229, beskrivelse: "tomatsaus, ost, reker, ansjos, oliven, hvitløk", merk: ["Inneholder skalldyr og fisk"] },
+    { navn: "10. Siciliana", pris: 229, beskrivelse: "crème fraîche, ost, soltørkede tomater, skinke, oliven", merk: ["Øl som passer: Weihenstephaner"] },
+    { navn: "11. Amore", pris: 229, beskrivelse: "crème fraîche, ost, marinert biff, soltørkede tomater, oliven", merk: ["Øl som passer: Weihenstephaner"] },
+    { navn: "12. Di Roma", pris: 229, beskrivelse: "crème fraîche, ost, pepperoni, soltørkede tomater, ananas", merk: ["Anbefalt", "Øl som passer: Nøgne Ø IPA"] },
+    { navn: "13. Provencale", pris: 229, beskrivelse: "tomatsaus, ost, marinert biff, løk, paprika, ruccola" },
+    { navn: "14. Napoletana", pris: 229, beskrivelse: "tomatsaus, ost, ansjos, kapers, fersk oregano" },
+    { navn: "16. La Bomba", pris: 239, beskrivelse: "tomatsaus, ost, pepperoni, hvitløk, chili, kapers", merk: ["Anbefalt"] },
+    { navn: "17. Mafiosa", pris: 239, beskrivelse: "tomatsaus, ost, marinert biff, paprika, løk, champignon", merk: ["Øl som passer: Nøgne Ø IPA"] },
+    { navn: "18. Ferrari", pris: 239, beskrivelse: "tomatsaus, ost, skinke, marinert biff, hvitløk, paprika, ruccola" },
+    { navn: "19. Calabrisella", pris: 229, beskrivelse: "tomatsaus, ost, salami, hvitløk, aubergine, oliven" },
+    { navn: "20. Mama Mia", pris: 229, beskrivelse: "tomatsaus, ost, pestokylling, pepperoni, champignon, soltørkede tomater, ruccola", merk: ["Øl som passer: Nøgne Ø Blond"] },
+    { navn: "21. Pizza Pollo", pris: 229, beskrivelse: "tomatsaus, ost, pestokylling, løk, paprika, ruccola", merk: ["Øl som passer: Nøgne Ø IPA"] },
+    { navn: "22. Pollo Bella", pris: 239, beskrivelse: "crème fraîche, ost, pestokylling, paprika, ananas, soltørkede tomater", merk: ["Anbefalt", "Øl som passer: Weihenstephaner eller Nøgne Ø Blond"] },
+    { navn: "23. Di Roma Favorita", pris: 239, beskrivelse: "tomatsaus, ost, hvitløk, oliven, soltørkede tomater, ruccola, ½ pestokylling, ½ marinert biff", merk: ["Anbefalt"] },
+    { navn: "24. Pollo Di Roma", pris: 229, beskrivelse: "½ tomatsaus, ost, pestokylling, oliven, ruccola · ½ crème fraîche, ost, pestokylling, paprika, soltørkede tomater", merk: ["Øl som passer: Sol"] },
+    { navn: "25. Cacciatore", pris: 229, beskrivelse: "tomatsaus, ost, salami, bacon, chili, hvitløk" },
+    { navn: "27. Casa Mia", pris: 245, beskrivelse: "crème fraîche, ost, parmaskinke, gorgonzola, valnøtter, parmesan, ruccola", merk: ["Inneholder valnøtter"] },
+    { navn: "28. Bakerens Spesial", pris: 239, beskrivelse: "halvt innbakt · tomatsaus, ost, champignon, løk, marinert biff, bearnaisesaus", merk: ["Inneholder egg", "Øl som passer: Sol"] },
+    { navn: "30. Roma Spesial", pris: 239, beskrivelse: "tomatsaus, ost, skinke, champignon, løk, biff, salami" },
+    { navn: "32. Eldorado", pris: 239, beskrivelse: "tomatsaus, ost, løk, paprika, biff, salami, bearnaisesaus", merk: ["Inneholder egg", "Øl som passer: Sol"] },
+    { navn: "33. Vegetarpizza", pris: 229, beskrivelse: "tomatsaus, ost, champignon, løk, paprika, ananas, fetaost", merk: ["Øl som passer: Nøgne Ø Blond"] },
+    { navn: "34. Gorgonzola", pris: 239, beskrivelse: "tomatsaus, ost, gorgonzolaost, ananas, biff, valnøtter, bearnaisesaus", merk: ["Inneholder egg og valnøtter"] },
+    { navn: "35. Quattro Formaggi", pris: 239, beskrivelse: "tomatsaus eller crème fraîche, ost, gorgonzolaost, fersk mozzarella, parmesan" }
   ],
 
-  /* Fyll inn rettene under – kategoriene dukker automatisk opp på siden.
-     Eksempel: { navn: "Tiramisu", pris: 95, beskrivelse: "hjemmelaget, med espresso" } */
-  "Salater": [],
-  "Barnemeny": [],
-  "Dessert": [],
+  "Ekstra": [
+    { navn: "Ekstra ost", pris: 35, beskrivelse: "inneholder melk" },
+    { navn: "Ekstra kjøtt", pris: 45, beskrivelse: "" },
+    { navn: "Dressing", pris: 30, beskrivelse: "inneholder melk" },
+    { navn: "Grønnsaker", pris: 25, beskrivelse: "" },
+    { navn: "Glutenfri bunn", pris: 60, beskrivelse: "" }
+  ],
+
+  "Barnemeny": [
+    { navn: "38. Topolino", pris: 139, beskrivelse: "tomatsaus, ost, skinke" },
+    { navn: "39. Pepito", pris: 139, beskrivelse: "tomatsaus, ost, pepperoni, ananas" }
+  ],
+
+  "Salat": [
+    { navn: "Parmasalat", pris: 229, beskrivelse: "parmaskinke, salat, agurk, cherrytomat, paprika, parmesan, pinjekjerner", merk: ["Inneholder melk, nøtter og pinjekjerner", "Øl som passer: Nøgne Ø IPA"] },
+    { navn: "Kyllingsalat", pris: 239, beskrivelse: "pestomarinert kylling, salat, agurk, cherrytomat, paprika, soltørket tomat, rødløk", merk: ["Øl som passer: Nøgne Ø Blond"] },
+    { navn: "Mozzarellasalat", pris: 179, beskrivelse: "forrett · fersk mozzarella, salat, cherrytomat, oliven, kapers", merk: ["Inneholder melk", "Øl som passer: Weihenstephaner"] }
+  ],
+
+  "Desserter": [
+    { navn: "Tiramisu", pris: 129, beskrivelse: "inneholder melk" },
+    { navn: "Jordbær-ostekake", pris: 129, beskrivelse: "inneholder melk og hvetemel" },
+    { navn: "Italiensk sorbet", pris: 129, beskrivelse: "" },
+    { navn: "Dagens kake", pris: 119, beskrivelse: "inneholder melk og hvetemel" }
+  ],
+
+  "Snacks": [
+    { navn: "Peanøtter", pris: 49, beskrivelse: "" },
+    { navn: "Chilinøtter", pris: 49, beskrivelse: "" }
+  ],
+
+  /* Legg til drikker her (eller i regnearket) – kategorien dukker automatisk opp. */
   "Drikker": []
 };
 
@@ -557,16 +598,21 @@ function renderTabs(){
   });
 }
 
+function esc(s){
+  return String(s).replace(/[&<>"']/g, c =>
+    ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
 function dishHTML(d){
   const tags = (d.merk || []).map(t =>
-    `<span class="tag${t === 'Anbefalt' ? ' rec' : ''}">${t}</span>`).join('');
+    `<span class="tag${t === 'Anbefalt' ? ' rec' : ''}">${esc(t)}</span>`).join('');
   return `<div class="dish">
     <div class="dish-line">
-      <span class="dish-name">${d.navn}</span>
+      <span class="dish-name">${esc(d.navn)}</span>
       <span class="dish-dots"></span>
-      <span class="dish-price">${d.pris} kr</span>
+      <span class="dish-price">${esc(d.pris)} kr</span>
     </div>
-    <p class="dish-desc">${d.beskrivelse}</p>
+    ${d.beskrivelse ? `<p class="dish-desc">${esc(d.beskrivelse)}</p>` : ''}
     ${tags ? `<div class="dish-tags">${tags}</div>` : ''}
   </div>`;
 }
@@ -582,12 +628,65 @@ function renderGrid(){
   }
   gridEl.innerHTML = items.length
     ? items.map(dishHTML).join('')
-    : `<p class="menu-empty">Ingen retter matcher «${searchEl.value}». Prøv et annet søkeord.</p>`;
+    : `<p class="menu-empty">Ingen retter matcher «${esc(searchEl.value)}». Prøv et annet søkeord.</p>`;
 }
 
 searchEl.addEventListener('input', renderGrid);
 renderTabs();
 renderGrid();
+
+/* ============ Ekstern meny fra Google Sheets ============ */
+function parseCSV(text){
+  const rows = []; let row = [], cur = '', q = false;
+  for (let i = 0; i < text.length; i++){
+    const c = text[i];
+    if (q){
+      if (c === '"'){ if (text[i+1] === '"'){ cur += '"'; i++; } else q = false; }
+      else cur += c;
+    }
+    else if (c === '"') q = true;
+    else if (c === ','){ row.push(cur); cur = ''; }
+    else if (c === '\n'){ row.push(cur); rows.push(row); row = []; cur = ''; }
+    else if (c !== '\r') cur += c;
+  }
+  if (cur.length || row.length){ row.push(cur); rows.push(row); }
+  return rows;
+}
+
+async function lastEksternMeny(){
+  if (!SHEET_CSV_URL) return;
+  try {
+    const res = await fetch(SHEET_CSV_URL, { cache: 'no-store' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const rows = parseCSV(await res.text());
+    if (rows.length < 2) return;
+    const header = rows[0].map(h => h.trim().toLowerCase());
+    const col = name => header.indexOf(name);
+    const iKat = col('kategori'), iNavn = col('navn'), iPris = col('pris'),
+          iBesk = col('beskrivelse'), iMerk = col('merk');
+    if (iKat < 0 || iNavn < 0 || iPris < 0) return;
+    const ny = {};
+    for (const r of rows.slice(1)){
+      const kat  = (r[iKat]  || '').trim();
+      const navn = (r[iNavn] || '').trim();
+      const pris = parseFloat((r[iPris] || '').replace(',', '.').replace(/[^\d.]/g, ''));
+      if (!kat || !navn || !isFinite(pris)) continue;   // ufullstendige rader hoppes over
+      const rett = { navn, pris, beskrivelse: (iBesk >= 0 ? r[iBesk] || '' : '').trim() };
+      const merk = (iMerk >= 0 ? r[iMerk] || '' : '').split(';').map(s => s.trim()).filter(Boolean);
+      if (merk.length) rett.merk = merk;
+      (ny[kat] = ny[kat] || []).push(rett);
+    }
+    if (!Object.keys(ny).length) return;                // tomt ark → behold reservemenyen
+    Object.keys(MENY).forEach(k => delete MENY[k]);
+    Object.assign(MENY, ny);
+    activeCat = null;
+    renderTabs();
+    renderGrid();
+  } catch (e){
+    console.warn('Kunne ikke laste meny fra regnearket – bruker reservemenyen.', e);
+  }
+}
+lastEksternMeny();
 
 /* ============ Hamburger-meny ============ */
 const burger = document.getElementById('burger');
