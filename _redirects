@@ -1,0 +1,16 @@
+# Cloudflare Pages/Workers redirects – cafediroma.no
+# Gamle WordPress-adresser -> ny side. 301 = permanent (SEO-verdi overføres).
+# NB: Legg filen i repo-roten med filnavnet "_redirects" (uten filendelse).
+#
+# OBS (rettet): en tidligere versjon av denne filen hadde en catch-all-regel
+# ("/* / 301") som i praksis omdirigerte "/" til "/" -> uendelig redirect-loop
+# (ERR_TOO_MANY_REDIRECTS). Den er fjernet. Legg aldri til en generell "/* -> /"
+# regel her; den er ikke nødvendig for en enkelt-fil-side og er lett å få til
+# å matche seg selv.
+
+/meny/ /#meny 301
+/meny /#meny 301
+/kontakt-oss/ /#kontakt 301
+/kontakt-oss /#kontakt 301
+/om-oss/ /#om-oss 301
+/om-oss /#om-oss 301
