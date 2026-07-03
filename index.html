@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cafe Di Roma – Italiensk pizza på Sofienberg, Oslo</title>
+<meta name="description" content="Cafe Di Roma i Sofienberggata 6, Oslo. Italiensk pizza med norsk vri – over 35 pizzaer, calzone og take away. Ring 22 37 64 44 eller bestill via Foodora.">
+<meta property="og:title" content="Cafe Di Roma – Italiensk pizza på Sofienberg, Oslo">
+<meta property="og:description" content="Italiensk pizza med norsk vri. Sofienberggata 6, Oslo. Take away og catering.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.cafediroma.no/">
+<link rel="canonical" href="https://www.cafediroma.no/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%2317352A'/%3E%3Ctext x='50' y='66' font-size='48' text-anchor='middle' fill='%23FBF7EE' font-family='Georgia'%3ER%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Spectral:ital,wght@0,400;0,500;1,400&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Cafe Di Roma",
+  "servesCuisine": "Italiensk pizza",
+  "telephone": "+47 22 37 64 44",
+  "url": "https://www.cafediroma.no/",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Sofienberggata 6",
+    "postalCode": "0551",
+    "addressLocality": "Oslo",
+    "addressCountry": "NO"
+  },
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday"], "opens": "15:00", "closes": "23:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Friday","Saturday"], "opens": "12:00", "closes": "01:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "12:00", "closes": "23:00" }
+  ],
+  "sameAs": [
+    "https://www.facebook.com/www.cafediroma.no/",
+    "https://www.instagram.com/cafediromaoslo"
+  ]
+}
+</script>
+
+<style>
+:root{
+  --verde:#17352A;        /* dyp grønn – hovedflate */
+  --verde-2:#1F4536;      /* lysere grønn – kort/detaljer */
+  --verde-line:#3A6B55;   /* linjer på grønn bunn */
+  --carta:#FBF7EE;        /* papir – menykortet */
+  --carta-dim:#F1E9D8;    /* papir, dempet */
+  --inchiostro:#22302A;   /* tekst på papir */
+  --pomodoro:#C03A2B;     /* rød aksent */
+  --sabbia:#D9C9A6;       /* sand – sekundærtekst på grønn */
+  --maxw:1100px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{
+  font-family:'Karla',sans-serif;
+  background:var(--verde);
+  color:var(--carta);
+  line-height:1.6;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3,.wordmark{font-family:'Marcellus',serif;font-weight:400}
+
+/* ---------- NAV ---------- */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(23,53,42,.94);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--verde-line);
+}
+.nav{
+  max-width:var(--maxw);margin:0 auto;padding:0 20px;
+  display:flex;align-items:center;justify-content:space-between;height:72px;
+}
+.wordmark{font-size:1.25rem;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;white-space:nowrap}
+.wordmark span{color:var(--pomodoro)}
+.nav-links{display:flex;align-items:center;gap:28px;list-style:none}
+.nav-links a{
+  text-decoration:none;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--sabbia);transition:color .2s;
+}
+.nav-links a:hover,.nav-links a:focus-visible{color:var(--carta)}
+.nav-social{display:flex;gap:14px;align-items:center}
+.nav-social a{display:flex;opacity:.85;transition:opacity .2s}
+.nav-social a:hover{opacity:1}
+.nav-social svg{width:18px;height:18px;fill:var(--sabbia)}
+.nav-cta{
+  background:var(--pomodoro);color:var(--carta)!important;
+  padding:9px 18px;border-radius:2px;transition:background .2s;
+}
+.nav-cta:hover{background:#A93325}
+.burger{
+  display:none;background:none;border:1px solid var(--verde-line);
+  border-radius:2px;padding:9px 11px;cursor:pointer;
+}
+.burger span{display:block;width:20px;height:2px;background:var(--carta);margin:4px 0;transition:.25s}
+.burger[aria-expanded="true"] span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+
+/* ---------- HERO ---------- */
+.hero{
+  min-height:100svh;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;padding:120px 20px 60px;position:relative;
+  background:
+    radial-gradient(ellipse 90% 60% at 50% -10%, rgba(58,107,85,.35), transparent 60%),
+    var(--verde);
+}
+.hero-eyebrow{
+  font-size:.8rem;letter-spacing:.34em;text-transform:uppercase;color:var(--sabbia);
+  display:flex;align-items:center;gap:16px;margin-bottom:26px;
+}
+.hero-eyebrow::before,.hero-eyebrow::after{content:"";width:44px;height:1px;background:var(--verde-line)}
+.hero h1{
+  font-size:clamp(2.6rem,7.5vw,5.2rem);
+  letter-spacing:.14em;text-transform:uppercase;line-height:1.08;
+}
+.hero h1 em{font-style:normal;color:var(--pomodoro)}
+.hero-tag{
+  font-family:'Spectral',serif;font-style:italic;
+  font-size:clamp(1.05rem,2.4vw,1.4rem);color:var(--sabbia);margin-top:18px;
+}
+.hero-quote{
+  max-width:560px;margin:30px auto 0;font-family:'Spectral',serif;
+  font-size:.98rem;color:rgba(251,247,238,.75);
+}
+.hero-actions{display:flex;gap:16px;margin-top:40px;flex-wrap:wrap;justify-content:center}
+.btn{
+  display:inline-block;text-decoration:none;font-size:.85rem;letter-spacing:.14em;
+  text-transform:uppercase;padding:15px 30px;border-radius:2px;transition:.2s;
+}
+.btn-red{background:var(--pomodoro);color:var(--carta)}
+.btn-red:hover{background:#A93325;transform:translateY(-1px)}
+.btn-ghost{border:1px solid var(--verde-line);color:var(--carta)}
+.btn-ghost:hover{border-color:var(--carta)}
+
+/* ---------- INFO STRIP ---------- */
+.strip{border-top:1px solid var(--verde-line);border-bottom:1px solid var(--verde-line);background:var(--verde-2)}
+.strip-inner{
+  max-width:var(--maxw);margin:0 auto;padding:26px 20px;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;text-align:center;
+}
+.strip-item .k{font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;color:var(--sabbia);margin-bottom:6px}
+.strip-item .v{font-family:'Spectral',serif;font-size:1.02rem}
+.strip-item a{text-decoration:none;border-bottom:1px solid var(--verde-line)}
+.strip-item a:hover{border-color:var(--carta)}
+
+/* ---------- SECTIONS ---------- */
+section{padding:90px 20px}
+.inner{max-width:var(--maxw);margin:0 auto}
+.sec-head{text-align:center;margin-bottom:54px}
+.sec-eyebrow{font-size:.76rem;letter-spacing:.3em;text-transform:uppercase;color:var(--pomodoro);margin-bottom:12px}
+.sec-head h2{font-size:clamp(1.9rem,4.5vw,2.8rem);letter-spacing:.08em;text-transform:uppercase}
+.sec-head p{color:var(--sabbia);max-width:560px;margin:14px auto 0;font-family:'Spectral',serif}
+
+/* ---------- MENY (papirkortet – signaturen) ---------- */
+#meny{padding-top:70px}
+.menu-card{
+  background:var(--carta);color:var(--inchiostro);
+  border-radius:4px;padding:clamp(28px,5vw,64px);
+  box-shadow:0 30px 80px rgba(0,0,0,.35);
+  position:relative;
+}
+.menu-card::before{
+  content:"";position:absolute;inset:12px;
+  border:1px solid rgba(34,48,42,.22);
+  border-radius:2px;pointer-events:none;
+}
+.menu-card::after{
+  content:"";position:absolute;inset:16px;
+  border:1px solid rgba(34,48,42,.12);
+  border-radius:2px;pointer-events:none;
+}
+.menu-card-head{text-align:center;margin-bottom:36px;position:relative;z-index:1}
+.menu-card-head h3{font-size:1.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--verde)}
+.menu-card-head p{font-family:'Spectral',serif;font-style:italic;color:#6B6152;margin-top:6px;font-size:.95rem}
+
+.menu-tools{position:relative;z-index:1;display:flex;flex-direction:column;gap:18px;margin-bottom:34px}
+.menu-tabs{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.menu-tab{
+  font-family:'Karla',sans-serif;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;
+  background:none;border:1px solid rgba(34,48,42,.3);color:var(--inchiostro);
+  padding:10px 20px;border-radius:2px;cursor:pointer;transition:.2s;
+}
+.menu-tab:hover{border-color:var(--verde)}
+.menu-tab.active{background:var(--verde);border-color:var(--verde);color:var(--carta)}
+.menu-search{display:flex;justify-content:center}
+.menu-search input{
+  width:min(420px,100%);padding:11px 16px;
+  font-family:'Karla',sans-serif;font-size:.92rem;
+  border:1px solid rgba(34,48,42,.3);border-radius:2px;
+  background:rgba(255,255,255,.55);color:var(--inchiostro);
+}
+.menu-search input:focus{outline:2px solid var(--verde);outline-offset:1px}
+
+.menu-grid{
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:1fr 1fr;gap:14px 56px;
+}
+.dish{padding:12px 0;border-bottom:1px dashed rgba(34,48,42,.18)}
+.dish-line{display:flex;align-items:baseline;gap:10px}
+.dish-name{font-family:'Marcellus',serif;font-size:1.06rem;color:var(--verde);white-space:normal}
+.dish-dots{flex:1;border-bottom:2px dotted rgba(34,48,42,.35);transform:translateY(-4px);min-width:24px}
+.dish-price{font-family:'Marcellus',serif;font-size:1.02rem;color:var(--pomodoro);white-space:nowrap}
+.dish-desc{font-family:'Spectral',serif;font-size:.92rem;color:#5E564A;margin-top:3px}
+.dish-tags{margin-top:6px;display:flex;gap:8px;flex-wrap:wrap}
+.tag{
+  font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;
+  padding:3px 9px;border-radius:2px;border:1px solid rgba(34,48,42,.25);color:#6B6152;
+}
+.tag.rec{background:var(--pomodoro);border-color:var(--pomodoro);color:var(--carta)}
+.menu-empty{
+  grid-column:1/-1;text-align:center;padding:40px 0;
+  font-family:'Spectral',serif;font-style:italic;color:#6B6152;
+}
+.menu-note{
+  position:relative;z-index:1;text-align:center;margin-top:34px;
+  font-family:'Spectral',serif;font-style:italic;font-size:.88rem;color:#6B6152;
+}
+
+/* ---------- OM OSS ---------- */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.about-quote{
+  font-family:'Spectral',serif;font-style:italic;
+  font-size:clamp(1.2rem,2.6vw,1.55rem);line-height:1.6;color:var(--carta);
+  border-left:2px solid var(--pomodoro);padding-left:26px;
+}
+.about-text p{color:var(--sabbia);font-family:'Spectral',serif;margin-bottom:16px}
+.about-text .btn{margin-top:8px}
+
+/* ---------- TAKE AWAY / CATERING ---------- */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.duo-card{
+  background:var(--verde-2);border:1px solid var(--verde-line);border-radius:4px;
+  padding:44px 38px;text-align:center;
+}
+.duo-card h3{font-size:1.3rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px}
+.duo-card p{color:var(--sabbia);font-family:'Spectral',serif;margin-bottom:24px}
+.duo-card .tel{font-family:'Marcellus',serif;font-size:1.5rem;display:block;margin-bottom:20px;text-decoration:none;color:var(--carta)}
+.duo-card .tel:hover{color:var(--sabbia)}
+
+/* ---------- KONTAKT ---------- */
+.contact{display:grid;grid-template-columns:1fr 1.2fr;gap:50px;align-items:start}
+.c-block{margin-bottom:30px}
+.c-block .k{font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;color:var(--pomodoro);margin-bottom:8px}
+.c-block .v{font-family:'Spectral',serif;font-size:1.08rem}
+.c-block a{text-decoration:none;border-bottom:1px solid var(--verde-line)}
+.c-block a:hover{border-color:var(--carta)}
+.hours{list-style:none;font-family:'Spectral',serif}
+.hours li{display:flex;justify-content:space-between;gap:20px;padding:7px 0;border-bottom:1px dashed var(--verde-line);max-width:340px}
+.hours li span:last-child{color:var(--sabbia)}
+.map-wrap{border:1px solid var(--verde-line);border-radius:4px;overflow:hidden;height:420px}
+.map-wrap iframe{width:100%;height:100%;border:0;display:block;filter:grayscale(.25)}
+.socials{display:flex;gap:14px;margin-top:6px}
+.socials a{
+  display:flex;align-items:center;justify-content:center;
+  width:42px;height:42px;border:1px solid var(--verde-line);border-radius:2px;transition:.2s;
+}
+.socials a:hover{border-color:var(--carta);transform:translateY(-2px)}
+.socials svg{width:19px;height:19px;fill:var(--carta)}
+
+/* ---------- FOOTER ---------- */
+footer{border-top:1px solid var(--verde-line);padding:34px 20px;text-align:center}
+footer .wordmark{font-size:1rem;display:block;margin-bottom:10px}
+footer p{font-size:.8rem;color:var(--sabbia);letter-spacing:.06em}
+
+/* ---------- RESPONSIVT ---------- */
+@media (max-width:920px){
+  .menu-grid{grid-template-columns:1fr}
+  .about,.contact{grid-template-columns:1fr;gap:40px}
+  .duo{grid-template-columns:1fr}
+}
+@media (max-width:820px){
+  .burger{display:block}
+  .nav-links{
+    position:fixed;top:72px;left:0;right:0;
+    background:var(--verde);border-bottom:1px solid var(--verde-line);
+    flex-direction:column;gap:0;padding:10px 0 20px;
+    transform:translateY(-130%);transition:transform .3s ease;
+  }
+  .nav-links.open{transform:translateY(0)}
+  .nav-links li{width:100%;text-align:center}
+  .nav-links a{display:block;padding:14px 0;font-size:.95rem}
+  .nav-cta{margin:10px auto 0;display:inline-block;width:auto}
+  .nav-social{display:none}
+  .strip-inner{grid-template-columns:1fr;gap:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav" aria-label="Hovedmeny">
+    <a class="wordmark" href="#hjem">Cafe <span>Di</span> Roma</a>
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="navLinks" aria-label="Meny">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#hjem">Hjem</a></li>
+      <li><a href="#meny">Meny</a></li>
+      <li><a href="#om-oss">Om oss</a></li>
+      <li><a href="#takeaway">Take away</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+      <li><a class="nav-cta" href="tel:+4722376444">22 37 64 44</a></li>
+    </ul>
+    <div class="nav-social">
+      <a href="https://www.facebook.com/www.cafediroma.no/" target="_blank" rel="noopener" aria-label="Facebook">
+        <svg viewBox="0 0 24 24"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5h1.65V3.6c-.3-.04-1.3-.13-2.45-.13-2.4 0-4.05 1.47-4.05 4.17v2.33H7.5V13h2.7v8h3.3z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/cafediromaoslo" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.26.07 1.64.07 4.85s0 3.6-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.26.06-1.64.07-4.85.07s-3.6 0-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.15 0-3.52 0-4.76.07-1.08.05-1.66.23-2.05.38-.52.2-.88.44-1.27.83-.39.39-.63.75-.83 1.27-.15.39-.33.97-.38 2.05C2.65 9.85 2.64 10.2 2.64 12s0 2.15.07 3.4c.05 1.08.23 1.66.38 2.05.2.52.44.88.83 1.27.39.39.75.63 1.27.83.39.15.97.33 2.05.38 1.24.06 1.6.07 4.76.07s3.52 0 4.76-.07c1.08-.05 1.66-.23 2.05-.38.52-.2.88-.44 1.27-.83.39-.39.63-.75.83-1.27.15-.39.33-.97.38-2.05.06-1.25.07-1.6.07-3.4s0-2.15-.07-3.4c-.05-1.08-.23-1.66-.38-2.05-.2-.52-.44-.88-.83-1.27a3.4 3.4 0 0 0-1.27-.83c-.39-.15-.97-.33-2.05-.38C15.52 4 15.15 4 12 4zm0 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4zm5.2-3.1a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3z"/></svg>
+      </a>
+    </div>
+  </nav>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="hjem">
+  <p class="hero-eyebrow">Sofienberg · Oslo</p>
+  <h1>Cafe <em>Di</em> Roma</h1>
+  <p class="hero-tag">Italiensk pizza med norsk vri</p>
+  <p class="hero-quote">«Pizza er et unikt møtepunkt hvor smak og lykke kommer sammen. Hver bit er som en mosaikk av smaker fra forskjellige kulturer. Er du klar for denne smaksreisen?»</p>
+  <div class="hero-actions">
+    <a class="btn btn-red" href="#meny">Se menyen</a>
+    <a class="btn btn-ghost" href="tel:+4722376444">Ring 22 37 64 44</a>
+  </div>
+</section>
+
+<!-- ============ INFO STRIP ============ -->
+<div class="strip">
+  <div class="strip-inner">
+    <div class="strip-item">
+      <div class="k">Adresse</div>
+      <div class="v"><a href="https://maps.app.goo.gl/15Db6Rr2sgdDj8Q96" target="_blank" rel="noopener">Sofienberggata 6, 0551 Oslo</a></div>
+    </div>
+    <div class="strip-item">
+      <div class="k">Åpningstider</div>
+      <div class="v">Man–Tor 15–23 · Fre–Lør 12–01 · Søn 12–23</div>
+    </div>
+    <div class="strip-item">
+      <div class="k">Telefon</div>
+      <div class="v"><a href="tel:+4722376444">22 37 64 44</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ MENY ============ -->
+<section id="meny">
+  <div class="inner">
+    <div class="sec-head">
+      <p class="sec-eyebrow">Menyen vår</p>
+      <h2>Fra ovnen på Sofienberg</h2>
+      <p>Over 35 pizzaer og calzoner – klassikere fra Roma og favoritter med norsk vri.</p>
+    </div>
+
+    <div class="menu-card">
+      <div class="menu-card-head">
+        <h3>Meny</h3>
+        <p>Alle pizzaer lages på ferske bunner med tomatsaus eller crème fraîche</p>
+      </div>
+
+      <div class="menu-tools">
+        <div class="menu-tabs" id="menuTabs" role="tablist" aria-label="Menykategorier"></div>
+        <div class="menu-search">
+          <input type="search" id="menuSearch" placeholder="Søk i menyen – f.eks. «pepperoni» eller «vegetar»" aria-label="Søk i menyen">
+        </div>
+      </div>
+
+      <div class="menu-grid" id="menuGrid" aria-live="polite"></div>
+
+      <p class="menu-note">Spørsmål om allergener? Spør oss – vi hjelper deg gjerne. Retter merket med allergen inneholder nøtter eller egg.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OM OSS ============ -->
+<section id="om-oss">
+  <div class="inner about">
+    <p class="about-quote">«Hver bit er som en mosaikk av smaker fra forskjellige kulturer, og etterlater en uforglemmelig smak i munnen.»</p>
+    <div class="about-text">
+      <p class="sec-eyebrow">Om oss</p>
+      <p>Cafe Di Roma er et pizzeria på Sofienberg i Oslo. Vi lager italiensk pizza med norsk vri – fra klassiske Margherita og Napoletana til egne favoritter som Di Roma og La Bomba.</p>
+      <p>Spis hos oss, ta med hjem eller la oss stå for maten til din neste begivenhet.</p>
+      <a class="btn btn-ghost" href="#kontakt">Finn veien til oss</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TAKE AWAY / CATERING ============ -->
+<section id="takeaway">
+  <div class="inner">
+    <div class="sec-head">
+      <p class="sec-eyebrow">Ta med & bestill</p>
+      <h2>Take away & catering</h2>
+    </div>
+    <div class="duo">
+      <div class="duo-card">
+        <h3>Take away</h3>
+        <p>Ring inn bestillingen din, eller bestill levering rett hjem via Foodora.</p>
+        <a class="tel" href="tel:+4722376444">22 37 64 44</a>
+        <a class="btn btn-red" href="https://www.foodora.no/restaurant/n9wh/cafe-di-roma" target="_blank" rel="noopener">Bestill på Foodora</a>
+      </div>
+      <div class="duo-card">
+        <h3>Book din begivenhet</h3>
+        <p>Bursdag, jobbfest eller samling? Ta kontakt, så setter vi sammen et opplegg som passer.</p>
+        <a class="tel" href="tel:+4722376444">22 37 64 44</a>
+        <a class="btn btn-ghost" href="#kontakt">Kontakt oss</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ KONTAKT ============ -->
+<section id="kontakt">
+  <div class="inner">
+    <div class="sec-head">
+      <p class="sec-eyebrow">Kontakt</p>
+      <h2>Her finner du oss</h2>
+    </div>
+    <div class="contact">
+      <div>
+        <div class="c-block">
+          <div class="k">Adresse</div>
+          <div class="v"><a href="https://maps.app.goo.gl/15Db6Rr2sgdDj8Q96" target="_blank" rel="noopener">Sofienberggata 6, 0551 Oslo</a></div>
+        </div>
+        <div class="c-block">
+          <div class="k">Telefon</div>
+          <div class="v"><a href="tel:+4722376444">22 37 64 44</a></div>
+        </div>
+        <div class="c-block">
+          <div class="k">Åpningstider</div>
+          <ul class="hours">
+            <li><span>Mandag–Torsdag</span><span>15:00–23:00</span></li>
+            <li><span>Fredag–Lørdag</span><span>12:00–01:00</span></li>
+            <li><span>Søndag</span><span>12:00–23:00</span></li>
+          </ul>
+        </div>
+        <div class="c-block">
+          <div class="k">Følg oss</div>
+          <div class="socials">
+            <a href="https://www.facebook.com/www.cafediroma.no/" target="_blank" rel="noopener" aria-label="Facebook">
+              <svg viewBox="0 0 24 24"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5h1.65V3.6c-.3-.04-1.3-.13-2.45-.13-2.4 0-4.05 1.47-4.05 4.17v2.33H7.5V13h2.7v8h3.3z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/cafediromaoslo" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.26.07 1.64.07 4.85s0 3.6-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.26.06-1.64.07-4.85.07s-3.6 0-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.15 0-3.52 0-4.76.07-1.08.05-1.66.23-2.05.38-.52.2-.88.44-1.27.83-.39.39-.63.75-.83 1.27-.15.39-.33.97-.38 2.05C2.65 9.85 2.64 10.2 2.64 12s0 2.15.07 3.4c.05 1.08.23 1.66.38 2.05.2.52.44.88.83 1.27.39.39.75.63 1.27.83.39.15.97.33 2.05.38 1.24.06 1.6.07 4.76.07s3.52 0 4.76-.07c1.08-.05 1.66-.23 2.05-.38.52-.2.88-.44 1.27-.83.39-.39.63-.75.83-1.27.15-.39.33-.97.38-2.05.06-1.25.07-1.6.07-3.4s0-2.15-.07-3.4c-.05-1.08-.23-1.66-.38-2.05-.2-.52-.44-.88-.83-1.27a3.4 3.4 0 0 0-1.27-.83c-.39-.15-.97-.33-2.05-.38C15.52 4 15.15 4 12 4zm0 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4zm5.2-3.1a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="map-wrap">
+        <iframe title="Kart – Cafe Di Roma, Sofienberggata 6, Oslo" loading="lazy"
+          src="https://www.google.com/maps?q=Sofienberggata+6,+0551+Oslo&output=embed"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="wordmark">Cafe <span style="color:var(--pomodoro)">Di</span> Roma</span>
+  <p>Sofienberggata 6, 0551 Oslo · 22 37 64 44 · © 2026 Cafe Di Roma. Alle rettigheter forbeholdt.</p>
+</footer>
+
+<script>
+/* =========================================================
+   MENYDATA – DETTE ER ALT SOM TRENGS FOR Å ADMINISTRERE MENYEN
+   ---------------------------------------------------------
+   Slik legger du til en rett:
+     { navn: "Tiramisu", pris: 95, beskrivelse: "hjemmelaget, med espresso" }
+
+   Valgfritt felt:  merk: ["Anbefalt"]  eller  merk: ["Inneholder nøtter"]
+   Tomme kategorier vises ikke på siden før de får innhold.
+   Endre pris? Bare endre tallet. Fjerne en rett? Slett linjen.
+   ========================================================= */
+const MENY = {
+  "Pizza": [
+    { navn: "Margherita", pris: 149, beskrivelse: "tomatsaus, mozzarella, fersk oregano" },
+    { navn: "Vesuvio", pris: 179, beskrivelse: "tomatsaus, mozzarella, skinke" },
+    { navn: "Hawaii", pris: 179, beskrivelse: "tomatsaus, mozzarella, skinke, ananas" },
+    { navn: "Capricciosa", pris: 179, beskrivelse: "tomatsaus, mozzarella, skinke, champignon, fersk oregano" },
+    { navn: "Contandina", pris: 179, beskrivelse: "tomatsaus, mozzarella, aubergine, asparges, paprika, champignon, oliven" },
+    { navn: "Tropicale", pris: 179, beskrivelse: "tomatsaus, mozzarella, pepperoni, paprika, ananas" },
+    { navn: "Calabrisella", pris: 179, beskrivelse: "tomatsaus, mozzarella, salami, hvitløk, aubergine, oliven" },
+    { navn: "Calzone Classic", pris: 179, beskrivelse: "innbakt · tomatsaus, mozzarella, skinke, løk" },
+    { navn: "Calzone Favorita", pris: 179, beskrivelse: "innbakt · tomatsaus, mozzarella, pepperoni, hvitløk, chili, champignon" },
+    { navn: "Calzone Di Roma", pris: 179, beskrivelse: "innbakt · tomatsaus, mozzarella, salami, hvitløk, chili, paprika" },
+    { navn: "Marinara", pris: 189, beskrivelse: "tomatsaus, mozzarella, reker, ansjos, oliven, hvitløk" },
+    { navn: "La Bussola", pris: 189, beskrivelse: "crème fraîche, mozzarella, reker, asparges, paprika, oliven" },
+    { navn: "Siciliana", pris: 189, beskrivelse: "crème fraîche, mozzarella, soltørkede tomater, skinke, oliven" },
+    { navn: "Amore", pris: 189, beskrivelse: "crème fraîche, mozzarella, marinert biff, soltørkede tomater, oliven" },
+    { navn: "Di Roma", pris: 189, beskrivelse: "crème fraîche, mozzarella, pepperoni, soltørkede tomater, ananas", merk: ["Anbefalt"] },
+    { navn: "Provencale", pris: 189, beskrivelse: "tomatsaus, mozzarella, marinert biff, løk, paprika, ruccola" },
+    { navn: "Napoletana", pris: 189, beskrivelse: "tomatsaus, mozzarella, ansjos, kapers, fersk oregano" },
+    { navn: "Vegetar", pris: 189, beskrivelse: "tomatsaus, mozzarella, champignon, løk, paprika, ananas, fetaost" },
+    { navn: "Quatro Stagioni", pris: 199, beskrivelse: "tomatsaus, mozzarella, skinke, artisjokk, champignon, reker" },
+    { navn: "La Bomba", pris: 199, beskrivelse: "tomatsaus, mozzarella, pepperoni, hvitløk, chili, kapers", merk: ["Anbefalt"] },
+    { navn: "Mafiosa", pris: 199, beskrivelse: "tomatsaus, mozzarella, marinert biff, paprika, løk, champignon" },
+    { navn: "Ferarri", pris: 199, beskrivelse: "tomatsaus, mozzarella, skinke, marinert biff, hvitløk, paprika, ruccola" },
+    { navn: "Mama Mia", pris: 199, beskrivelse: "tomatsaus, mozzarella, pestokylling, pepperoni, champignon, soltørkede tomater, ruccola", merk: ["Inneholder nøtter"] },
+    { navn: "Pizza Pollo", pris: 199, beskrivelse: "tomatsaus, mozzarella, pestokylling, løk, paprika, ruccola", merk: ["Inneholder nøtter"] },
+    { navn: "Pollo Bella", pris: 199, beskrivelse: "crème fraîche, mozzarella, pestokylling, paprika, ananas, soltørkede tomater", merk: ["Anbefalt"] },
+    { navn: "Pollo Di Roma", pris: 199, beskrivelse: "tomatsaus, mozzarella, pestokylling, oliven, ruccola" },
+    { navn: "Di Roma Favorita", pris: 199, beskrivelse: "tomatsaus, mozzarella, hvitløk, oliven, soltørkede tomater, ruccola, ½ pestokylling, ½ marinert biff", merk: ["Anbefalt"] },
+    { navn: "Cacciatore", pris: 199, beskrivelse: "tomatsaus, mozzarella, salami, bacon, chili, hvitløk" },
+    { navn: "Italiana", pris: 199, beskrivelse: "tomatsaus, crème fraîche, gorgonzola, hakkede valnøtter", merk: ["Inneholder nøtter"] },
+    { navn: "Casa Mia", pris: 199, beskrivelse: "crème fraîche, mozzarella, parmaskinke, gorgonzola, valnøtter, parmesan, ruccola", merk: ["Inneholder nøtter"] },
+    { navn: "Bakerens spesial", pris: 199, beskrivelse: "tomatsaus, mozzarella, champignon, løk, marinert biff, bearnaisesaus", merk: ["Inneholder egg"] },
+    { navn: "Roma spesial", pris: 199, beskrivelse: "tomatsaus, mozzarella, skinke, champignon, løk, biff, salami" },
+    { navn: "Eldorado", pris: 199, beskrivelse: "tomatsaus, mozzarella, løk, paprika, biff, salami, bearnaisesaus", merk: ["Inneholder egg"] },
+    { navn: "Gorgonzola", pris: 199, beskrivelse: "tomatsaus, mozzarella, gorgonzola, ananas, biff, valnøtter, bearnaisesaus", merk: ["Inneholder nøtter"] },
+    { navn: "Quattro Formaggi", pris: 199, beskrivelse: "tomatsaus eller crème fraîche, mozzarella, gorgonzola, fersk mozzarella, parmesan" },
+    { navn: "Dønner Pizza", pris: 199, beskrivelse: "tomatsaus, mozzarella, dønner, løk, champignon, ruccola og dressing" },
+    { navn: "Tacopizza", pris: 199, beskrivelse: "tomatsaus, mozzarella, tacokjøttdeig, nachos, mais, løk og paprika" }
+  ],
+
+  /* Fyll inn rettene under – kategoriene dukker automatisk opp på siden.
+     Eksempel: { navn: "Tiramisu", pris: 95, beskrivelse: "hjemmelaget, med espresso" } */
+  "Salater": [],
+  "Barnemeny": [],
+  "Dessert": [],
+  "Drikker": []
+};
+
+/* ============ Rendering (trenger ikke røres) ============ */
+const tabsEl = document.getElementById('menuTabs');
+const gridEl = document.getElementById('menuGrid');
+const searchEl = document.getElementById('menuSearch');
+let activeCat = null;
+
+function categories(){
+  return Object.keys(MENY).filter(c => MENY[c].length > 0);
+}
+
+function renderTabs(){
+  const cats = categories();
+  if (!activeCat || !cats.includes(activeCat)) activeCat = cats[0];
+  tabsEl.innerHTML = '';
+  cats.forEach(cat => {
+    const b = document.createElement('button');
+    b.className = 'menu-tab' + (cat === activeCat ? ' active' : '');
+    b.type = 'button';
+    b.setAttribute('role','tab');
+    b.setAttribute('aria-selected', cat === activeCat ? 'true' : 'false');
+    b.textContent = cat;
+    b.addEventListener('click', () => { activeCat = cat; searchEl.value=''; renderTabs(); renderGrid(); });
+    tabsEl.appendChild(b);
+  });
+}
+
+function dishHTML(d){
+  const tags = (d.merk || []).map(t =>
+    `<span class="tag${t === 'Anbefalt' ? ' rec' : ''}">${t}</span>`).join('');
+  return `<div class="dish">
+    <div class="dish-line">
+      <span class="dish-name">${d.navn}</span>
+      <span class="dish-dots"></span>
+      <span class="dish-price">${d.pris} kr</span>
+    </div>
+    <p class="dish-desc">${d.beskrivelse}</p>
+    ${tags ? `<div class="dish-tags">${tags}</div>` : ''}
+  </div>`;
+}
+
+function renderGrid(){
+  const q = searchEl.value.trim().toLowerCase();
+  let items;
+  if (q){
+    items = categories().flatMap(c => MENY[c]).filter(d =>
+      (d.navn + ' ' + d.beskrivelse).toLowerCase().includes(q));
+  } else {
+    items = MENY[activeCat] || [];
+  }
+  gridEl.innerHTML = items.length
+    ? items.map(dishHTML).join('')
+    : `<p class="menu-empty">Ingen retter matcher «${searchEl.value}». Prøv et annet søkeord.</p>`;
+}
+
+searchEl.addEventListener('input', renderGrid);
+renderTabs();
+renderGrid();
+
+/* ============ Hamburger-meny ============ */
+const burger = document.getElementById('burger');
+const navLinks = document.getElementById('navLinks');
+burger.addEventListener('click', () => {
+  const open = navLinks.classList.toggle('open');
+  burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+navLinks.querySelectorAll('a').forEach(a =>
+  a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    burger.setAttribute('aria-expanded','false');
+  })
+);
+</script>
+</body>
+</html>
