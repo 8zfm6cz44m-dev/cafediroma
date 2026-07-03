@@ -32,8 +32,7 @@
   },
   "openingHoursSpecification": [
     { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday"], "opens": "15:00", "closes": "23:00" },
-    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Friday","Saturday"], "opens": "12:00", "closes": "01:00" },
-    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "12:00", "closes": "23:00" }
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Friday","Saturday","Sunday"], "opens": "12:00", "closes": "23:00" }
   ],
   "sameAs": [
     "https://www.facebook.com/www.cafediroma.no/",
@@ -52,7 +51,7 @@
   --carta:#FBF7EE;        /* papir – menykortet */
   --carta-dim:#F1E9D8;    /* papir, dempet */
   --inchiostro:#262D20;   /* mørk grønnsvart tekst */
-  --pomodoro:#B0331F;     /* rød aksent (justert for lys bunn) */
+  --pomodoro:#D9721E;      /* oransje aksent (justert for lys bunn) */
   --sabbia:#414A38;       /* sekundærtekst på salvia – mørk oliven */
   --maxw:1100px;
 }
@@ -95,7 +94,7 @@ header{
   background:var(--pomodoro);color:var(--carta)!important;
   padding:9px 18px;border-radius:2px;transition:background .2s;
 }
-.nav-cta:hover{background:#A93325}
+.nav-cta:hover{background:#B85F16}
 .nav-wolt{background:#009DE0}
 .nav-wolt:hover{background:#0087C2}
 .burger{
@@ -149,7 +148,7 @@ header{
   text-transform:uppercase;padding:15px 30px;border-radius:2px;transition:.2s;
 }
 .btn-red{background:var(--pomodoro);color:var(--carta)}
-.btn-red:hover{background:#A93325;transform:translateY(-1px)}
+.btn-red:hover{background:#B85F16;transform:translateY(-1px)}
 .btn-ghost{border:1px solid var(--verde-line);color:var(--inchiostro)}
 .btn-ghost:hover{border-color:var(--inchiostro)}
 
@@ -362,8 +361,7 @@ footer p{font-size:.8rem;color:var(--sabbia);letter-spacing:.06em}
       <div class="k">Åpningstider</div>
       <div class="v v-hours">
         <span>Man–tor</span>15.00–23.00<br>
-        <span>Fre–lør</span>12.00–01.00<br>
-        <span>Søndag</span>12.00–23.00
+        <span>Fre–søn</span>12.00–23.00
       </div>
     </div>
     <div class="strip-item">
@@ -460,8 +458,7 @@ footer p{font-size:.8rem;color:var(--sabbia);letter-spacing:.06em}
           <div class="k">Åpningstider</div>
           <ul class="hours">
             <li><span>Mandag–torsdag</span><span>kl. 15.00–23.00</span></li>
-            <li><span>Fredag–lørdag</span><span>kl. 12.00–01.00</span></li>
-            <li><span>Søndag</span><span>kl. 12.00–23.00</span></li>
+            <li><span>Fredag–søndag</span><span>kl. 12.00–23.00</span></li>
           </ul>
         </div>
         <div class="c-block">
