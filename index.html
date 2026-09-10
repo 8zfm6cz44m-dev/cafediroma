@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cafe Di Roma – Italiensk pizza på Sofienberg, Oslo</title>
-<meta name="description" content="Cafe Di Roma i Sofienberggata 6, Oslo. Italiensk pizza med norsk vri – over 35 pizzaer, calzone og take away. Ring 22 37 64 44 eller bestill via Foodora.">
+<meta name="description" content="Cafe Di Roma i Sofienberggata 6, Oslo. Italiensk pizza med norsk vri, Pizza Gourmet, sallader, vin og drikke. Ring 22 37 64 44 eller bestill levering via Wolt.">
 <meta property="og:title" content="Cafe Di Roma – Italiensk pizza på Sofienberg, Oslo">
 <meta property="og:description" content="Italiensk pizza med norsk vri. Sofienberggata 6, Oslo. Take away og catering.">
 <meta property="og:type" content="website">
@@ -377,7 +377,7 @@ footer p{font-size:.8rem;color:var(--sabbia);letter-spacing:.06em}
     <div class="sec-head">
       <p class="sec-eyebrow">Menyen vår</p>
       <h2>Fra ovnen på Sofienberg</h2>
-      <p>30 pizzaer og calzoner, salater, barnemeny og desserter – klassikere fra Roma og favoritter med norsk vri.</p>
+      <p>Klassiske pizzaer og Pizza Gourmet, sallader, barnemeny, desserter, drikke og vin – smaker fra Roma med norsk vri.</p>
     </div>
 
     <div class="menu-card">
@@ -395,7 +395,7 @@ footer p{font-size:.8rem;color:var(--sabbia);letter-spacing:.06em}
 
       <div class="menu-grid" id="menuGrid" aria-live="polite"></div>
 
-      <p class="menu-note">Alle pizzabunner inneholder melk, hvetemel og egg – glutenfri bunn kan velges (+60 kr). Alle pizzaer har norvegia- og mozzarellaost. Alle salater serveres med brød og husets hvitløksdressing. Spørsmål om allergener? Spør oss – vi hjelper deg gjerne.</p>
+      <p class="menu-note">Alle pizzabunner inneholder melk, hvetemel og egg – glutenfri bunn kan velges (+60 kr). Alle viner inneholder sulfitter, og all øl inneholder maltet bygg. Ingen tillegg for ekstra sirup i varme drikker. Spørsmål om allergener? Spør oss – vi hjelper deg gjerne.</p>
     </div>
   </div>
 </section>
@@ -522,36 +522,20 @@ const SHEET_CSV_URL = "";
    ========================================================= */
 const MENY = {
   "Pizza": [
-    { navn: "1. Margherita", pris: 189, beskrivelse: "tomatsaus, ost, fersk oregano" },
-    { navn: "2. Capricciosa", pris: 219, beskrivelse: "tomatsaus, ost, skinke, champignon, fersk oregano" },
-    { navn: "3. Contandina", pris: 219, beskrivelse: "tomatsaus, ost, aubergine, asparges, paprika, champignon, oliven" },
-    { navn: "4. Tropicale", pris: 219, beskrivelse: "tomatsaus, ost, pepperoni, paprika, ananas" },
-    { navn: "5. Calzone Classic", pris: 219, beskrivelse: "innbakt · tomatsaus, ost, skinke, løk" },
-    { navn: "6. Calzone Favorita", pris: 219, beskrivelse: "innbakt · tomatsaus, ost, pepperoni, hvitløk, chili, champignon" },
-    { navn: "7. Calzone Di Roma", pris: 219, beskrivelse: "innbakt · tomatsaus, ost, salami, hvitløk, chili, paprika" },
-    { navn: "8. Marinara", pris: 229, beskrivelse: "tomatsaus, ost, reker, ansjos, oliven, hvitløk", merk: ["Inneholder skalldyr og fisk"] },
-    { navn: "10. Siciliana", pris: 229, beskrivelse: "crème fraîche, ost, soltørkede tomater, skinke, oliven", merk: ["Øl som passer: Weihenstephaner"] },
-    { navn: "11. Amore", pris: 229, beskrivelse: "crème fraîche, ost, marinert biff, soltørkede tomater, oliven", merk: ["Øl som passer: Weihenstephaner"] },
-    { navn: "12. Di Roma", pris: 229, beskrivelse: "crème fraîche, ost, pepperoni, soltørkede tomater, ananas", merk: ["Anbefalt", "Øl som passer: Nøgne Ø IPA"] },
-    { navn: "13. Provencale", pris: 229, beskrivelse: "tomatsaus, ost, marinert biff, løk, paprika, ruccola" },
-    { navn: "14. Napoletana", pris: 229, beskrivelse: "tomatsaus, ost, ansjos, kapers, fersk oregano" },
-    { navn: "16. La Bomba", pris: 239, beskrivelse: "tomatsaus, ost, pepperoni, hvitløk, chili, kapers", merk: ["Anbefalt"] },
-    { navn: "17. Mafiosa", pris: 239, beskrivelse: "tomatsaus, ost, marinert biff, paprika, løk, champignon", merk: ["Øl som passer: Nøgne Ø IPA"] },
-    { navn: "18. Ferrari", pris: 239, beskrivelse: "tomatsaus, ost, skinke, marinert biff, hvitløk, paprika, ruccola" },
-    { navn: "19. Calabrisella", pris: 229, beskrivelse: "tomatsaus, ost, salami, hvitløk, aubergine, oliven" },
-    { navn: "20. Mama Mia", pris: 229, beskrivelse: "tomatsaus, ost, pestokylling, pepperoni, champignon, soltørkede tomater, ruccola", merk: ["Øl som passer: Nøgne Ø Blond"] },
-    { navn: "21. Pizza Pollo", pris: 229, beskrivelse: "tomatsaus, ost, pestokylling, løk, paprika, ruccola", merk: ["Øl som passer: Nøgne Ø IPA"] },
-    { navn: "22. Pollo Bella", pris: 239, beskrivelse: "crème fraîche, ost, pestokylling, paprika, ananas, soltørkede tomater", merk: ["Anbefalt", "Øl som passer: Weihenstephaner eller Nøgne Ø Blond"] },
-    { navn: "23. Di Roma Favorita", pris: 239, beskrivelse: "tomatsaus, ost, hvitløk, oliven, soltørkede tomater, ruccola, ½ pestokylling, ½ marinert biff", merk: ["Anbefalt"] },
-    { navn: "24. Pollo Di Roma", pris: 229, beskrivelse: "½ tomatsaus, ost, pestokylling, oliven, ruccola · ½ crème fraîche, ost, pestokylling, paprika, soltørkede tomater", merk: ["Øl som passer: Sol"] },
-    { navn: "25. Cacciatore", pris: 229, beskrivelse: "tomatsaus, ost, salami, bacon, chili, hvitløk" },
-    { navn: "27. Casa Mia", pris: 245, beskrivelse: "crème fraîche, ost, parmaskinke, gorgonzola, valnøtter, parmesan, ruccola", merk: ["Inneholder valnøtter"] },
-    { navn: "28. Bakerens Spesial", pris: 239, beskrivelse: "halvt innbakt · tomatsaus, ost, champignon, løk, marinert biff, bearnaisesaus", merk: ["Inneholder egg", "Øl som passer: Sol"] },
-    { navn: "30. Roma Spesial", pris: 239, beskrivelse: "tomatsaus, ost, skinke, champignon, løk, biff, salami" },
-    { navn: "32. Eldorado", pris: 239, beskrivelse: "tomatsaus, ost, løk, paprika, biff, salami, bearnaisesaus", merk: ["Inneholder egg", "Øl som passer: Sol"] },
-    { navn: "33. Vegetarpizza", pris: 229, beskrivelse: "tomatsaus, ost, champignon, løk, paprika, ananas, fetaost", merk: ["Øl som passer: Nøgne Ø Blond"] },
-    { navn: "34. Gorgonzola", pris: 239, beskrivelse: "tomatsaus, ost, gorgonzolaost, ananas, biff, valnøtter, bearnaisesaus", merk: ["Inneholder egg og valnøtter"] },
-    { navn: "35. Quattro Formaggi", pris: 239, beskrivelse: "tomatsaus eller crème fraîche, ost, gorgonzolaost, fersk mozzarella, parmesan" }
+    { navn: "1. Margherita", pris: 239, beskrivelse: "tomatsaus, ost, fersk oregano" },
+    { navn: "2. Calzone med ost og skinke", pris: 249, beskrivelse: "innbakt · tomatsaus, ost, skinke, løk" },
+    { navn: "3. Casa Mia", pris: 259, beskrivelse: "crème fraîche, ost, parmaskinke, gorgonzola, valnøtter, parmesan, ruccola", merk: ["Inneholder valnøtter"] },
+    { navn: "4. Quattro Formaggi", pris: 259, beskrivelse: "tomatsaus eller crème fraîche, ost, gorgonzolaost, fersk mozzarella, parmesan" },
+    { navn: "5. La Bomba", pris: 249, beskrivelse: "tomatsaus, ost, pepperoni, hvitløk, chili, kapers", merk: ["Anbefalt"] },
+    { navn: "6. Roma Spesial", pris: 269, beskrivelse: "tomatsaus, ost, skinke, champignon, løk, biff, salami" },
+    { navn: "7. Mafiosa", pris: 249, beskrivelse: "tomatsaus, ost, marinert biff, paprika, løk, champignon", merk: ["Øl som passer: Nøgne Ø IPA"] },
+    { navn: "8. Pizza Pollo", pris: 249, beskrivelse: "tomatsaus, ost, pestokylling, løk, paprika, ruccola", merk: ["Øl som passer: Nøgne Ø IPA"] },
+    { navn: "9. Marinara", pris: 259, beskrivelse: "tomatsaus eller crème fraîche, mozzarella, ansjos, reker, oliven, hvitløk", merk: ["Inneholder skalldyr og fisk"] },
+    { navn: "Diavola Doc", pris: 279, beskrivelse: "tomatsaus, mozzarella, sterk salami, chili, honning", merk: ["Gourmet"] },
+    { navn: "Tartufo", pris: 279, beskrivelse: "mozzarella, stekt sopp, trøffelsalami, trøffelsaus", merk: ["Gourmet"] },
+    { navn: "Pistasjo", pris: 279, beskrivelse: "mozzarella, salsiccia, pistasjpesto, pistasjnøtter", merk: ["Gourmet", "Inneholder nøtter"] },
+    { navn: "Fungi", pris: 279, beskrivelse: "hvit trøffelsaus, mozzarella, blandet sopp", merk: ["Gourmet"] },
+    { navn: "Mortadella", pris: 279, beskrivelse: "hvit bunn, mortadella, burrata, pistasjnøtter", merk: ["Gourmet", "Inneholder nøtter"] }
   ],
 
   "Ekstra": [
@@ -568,9 +552,8 @@ const MENY = {
   ],
 
   "Salat": [
-    { navn: "Parmasalat", pris: 229, beskrivelse: "parmaskinke, salat, agurk, cherrytomat, paprika, parmesan, pinjekjerner", merk: ["Inneholder melk, nøtter og pinjekjerner", "Øl som passer: Nøgne Ø IPA"] },
-    { navn: "Kyllingsalat", pris: 239, beskrivelse: "pestomarinert kylling, salat, agurk, cherrytomat, paprika, soltørket tomat, rødløk", merk: ["Øl som passer: Nøgne Ø Blond"] },
-    { navn: "Mozzarellasalat", pris: 179, beskrivelse: "forrett · fersk mozzarella, salat, cherrytomat, oliven, kapers", merk: ["Inneholder melk", "Øl som passer: Weihenstephaner"] }
+    { navn: "Caprese con Burrata", pris: 259, beskrivelse: "tomatconfit, fersk basilikum og balsamicoglasur, brød, servert med burrata", merk: ["Inneholder melk"] },
+    { navn: "Insalata di Pollo", pris: 259, beskrivelse: "kylling, rødløk, cherrytomat, oliven, olje, brød" }
   ],
 
   "Desserter": [
@@ -585,8 +568,66 @@ const MENY = {
     { navn: "Chilinøtter", pris: 49, beskrivelse: "" }
   ],
 
-  /* Legg til drikker her (eller i regnearket) – kategorien dukker automatisk opp. */
-  "Drikker": []
+  "Drikke": [
+    { navn: "Coca Cola 0,35 L", pris: 56, beskrivelse: "" },
+    { navn: "Coca Cola Zero 0,35 L", pris: 56, beskrivelse: "" },
+    { navn: "Fanta 0,35 L", pris: 56, beskrivelse: "" },
+    { navn: "Olden 0,35 L", pris: 56, beskrivelse: "" },
+    { navn: "Olden Lemon 0,35 L", pris: 56, beskrivelse: "" },
+    { navn: "Eplemost 0,35 L", pris: 56, beskrivelse: "" },
+    { navn: "Appelsinjuice 0,35 L", pris: 56, beskrivelse: "" },
+    { navn: "Ice Tea", pris: 72, beskrivelse: "" },
+    { navn: "Kuli", pris: 39, beskrivelse: "eple, jordbær eller appelsin" },
+    { navn: "Artic Water", pris: 56, beskrivelse: "" }
+  ],
+
+  "Varm drikke": [
+    { navn: "Kaffe / Te", pris: 46, beskrivelse: "" },
+    { navn: "Cappuccino", pris: 59, beskrivelse: "inneholder melk" },
+    { navn: "Café Latte", pris: 59, beskrivelse: "inneholder melk" },
+    { navn: "Café Mocca", pris: 59, beskrivelse: "inneholder melk" },
+    { navn: "Café Cortado", pris: 59, beskrivelse: "inneholder melk" },
+    { navn: "Varm sjokolade", pris: 59, beskrivelse: "inneholder melk" },
+    { navn: "Varm sjokolade m/krem", pris: 59, beskrivelse: "inneholder melk" },
+    { navn: "Espresso", pris: 45, beskrivelse: "" },
+    { navn: "Dobbel espresso", pris: 69, beskrivelse: "" }
+  ],
+
+  "Øl/Cider": [
+    { navn: "Hansa 0,5 L", pris: 98, beskrivelse: "" },
+    { navn: "Hansa 0,33 L", pris: 84, beskrivelse: "" },
+    { navn: "Heineken 0,33 L", pris: 129, beskrivelse: "flaske" },
+    { navn: "Hansa Mango IPA 0,33 L", pris: 139, beskrivelse: "flaske" },
+    { navn: "Punk IPA 0,33 L", pris: 129, beskrivelse: "" },
+    { navn: "Mugge 1,5 L", pris: 259, beskrivelse: "" },
+    { navn: "Nøgne Ø IPA", pris: 129, beskrivelse: "" },
+    { navn: "Nøgne Ø Blond", pris: 129, beskrivelse: "" },
+    { navn: "Weihenstephaner", pris: 159, beskrivelse: "" },
+    { navn: "Sol", pris: 129, beskrivelse: "" },
+    { navn: "Cider (pære)", pris: 229, beskrivelse: "" },
+    { navn: "Bulmers", pris: 149, beskrivelse: "" },
+    { navn: "Clausthaler", pris: 79, beskrivelse: "flaske, alkoholfri" },
+    { navn: "Heineken 0.0%", pris: 79, beskrivelse: "flaske, alkoholfri" }
+  ],
+
+  "Rødvin": [
+    { navn: "Husets rødvin (glass)", pris: 139, beskrivelse: "" },
+    { navn: "Husets rødvin (flaske)", pris: 589, beskrivelse: "" },
+    { navn: "Grimaldi Barbera d'Alba", pris: 774, beskrivelse: "" },
+    { navn: "Cesari Valpolicella Classico", pris: 699, beskrivelse: "" },
+    { navn: "Masi Venezia", pris: 699, beskrivelse: "Italia" },
+    { navn: "Barbera Piemonte", pris: 699, beskrivelse: "Italia" },
+    { navn: "Montepulciano D'Abruzzo", pris: 699, beskrivelse: "Italia" },
+    { navn: "Amarone Della Valpolicella", pris: 869, beskrivelse: "Italia" }
+  ],
+
+  "Hvitvin": [
+    { navn: "Husets hvitvin (glass)", pris: 139, beskrivelse: "" },
+    { navn: "Husets hvitvin (flaske)", pris: 589, beskrivelse: "" },
+    { navn: "Masi", pris: 699, beskrivelse: "Italia, tørr" },
+    { navn: "Chardonnay", pris: 699, beskrivelse: "Italia, tørr" },
+    { navn: "Chablis Val De Mercy", pris: 799, beskrivelse: "Frankrike" }
+  ]
 };
 
 /* ============ Rendering (trenger ikke røres) ============ */
