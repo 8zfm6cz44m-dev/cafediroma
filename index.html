@@ -377,7 +377,7 @@ footer p{font-size:.8rem;color:var(--sabbia);letter-spacing:.06em}
     <div class="sec-head">
       <p class="sec-eyebrow">Menyen vår</p>
       <h2>Fra ovnen på Sofienberg</h2>
-      <p>Klassiske pizzaer og Pizza Gourmet, sallader, barnemeny, desserter, drikke og vin – smaker fra Roma med norsk vri.</p>
+      <p>Klassiske pizzaer og Pizza Gourmet, sallader og drikke – smaker fra Roma med norsk vri.</p>
     </div>
 
     <div class="menu-card">
@@ -533,41 +533,14 @@ const MENY = {
     { navn: "9. Marinara", pris: 259, beskrivelse: "tomatsaus eller crème fraîche, mozzarella, ansjos, reker, oliven, hvitløk", merk: ["Inneholder skalldyr og fisk"] },
     { navn: "Diavola Doc", pris: 279, beskrivelse: "tomatsaus, mozzarella, sterk salami, chili, honning", merk: ["Gourmet"] },
     { navn: "Tartufo", pris: 279, beskrivelse: "mozzarella, stekt sopp, trøffelsalami, trøffelsaus", merk: ["Gourmet"] },
-    { navn: "Pistasjo", pris: 279, beskrivelse: "mozzarella, salsiccia, pistasjpesto, pistasjnøtter", merk: ["Gourmet", "Inneholder nøtter"] },
+    { navn: "Pistasjo", pris: 279, beskrivelse: "mozzarella, salsiccia, pistasjpesto, pistasjnøtter", merk: ["Gourmet","Inneholder nøtter"] },
     { navn: "Fungi", pris: 279, beskrivelse: "hvit trøffelsaus, mozzarella, blandet sopp", merk: ["Gourmet"] },
-    { navn: "Mortadella", pris: 279, beskrivelse: "hvit bunn, mortadella, burrata, pistasjnøtter", merk: ["Gourmet", "Inneholder nøtter"] }
+    { navn: "Mortadella", pris: 279, beskrivelse: "hvit bunn, mortadella, burrata, pistasjnøtter", merk: ["Gourmet","Inneholder nøtter"] }
   ],
-
-  "Ekstra": [
-    { navn: "Ekstra ost", pris: 35, beskrivelse: "inneholder melk" },
-    { navn: "Ekstra kjøtt", pris: 45, beskrivelse: "" },
-    { navn: "Dressing", pris: 30, beskrivelse: "inneholder melk" },
-    { navn: "Grønnsaker", pris: 25, beskrivelse: "" },
-    { navn: "Glutenfri bunn", pris: 60, beskrivelse: "" }
-  ],
-
-  "Barnemeny": [
-    { navn: "38. Topolino", pris: 139, beskrivelse: "tomatsaus, ost, skinke" },
-    { navn: "39. Pepito", pris: 139, beskrivelse: "tomatsaus, ost, pepperoni, ananas" }
-  ],
-
   "Salat": [
     { navn: "Caprese con Burrata", pris: 259, beskrivelse: "tomatconfit, fersk basilikum og balsamicoglasur, brød, servert med burrata", merk: ["Inneholder melk"] },
     { navn: "Insalata di Pollo", pris: 259, beskrivelse: "kylling, rødløk, cherrytomat, oliven, olje, brød" }
   ],
-
-  "Desserter": [
-    { navn: "Tiramisu", pris: 129, beskrivelse: "inneholder melk" },
-    { navn: "Jordbær-ostekake", pris: 129, beskrivelse: "inneholder melk og hvetemel" },
-    { navn: "Italiensk sorbet", pris: 129, beskrivelse: "" },
-    { navn: "Dagens kake", pris: 119, beskrivelse: "inneholder melk og hvetemel" }
-  ],
-
-  "Snacks": [
-    { navn: "Peanøtter", pris: 49, beskrivelse: "" },
-    { navn: "Chilinøtter", pris: 49, beskrivelse: "" }
-  ],
-
   "Drikke": [
     { navn: "Coca Cola 0,35 L", pris: 56, beskrivelse: "" },
     { navn: "Coca Cola Zero 0,35 L", pris: 56, beskrivelse: "" },
@@ -578,10 +551,7 @@ const MENY = {
     { navn: "Appelsinjuice 0,35 L", pris: 56, beskrivelse: "" },
     { navn: "Ice Tea", pris: 72, beskrivelse: "" },
     { navn: "Kuli", pris: 39, beskrivelse: "eple, jordbær eller appelsin" },
-    { navn: "Artic Water", pris: 56, beskrivelse: "" }
-  ],
-
-  "Varm drikke": [
+    { navn: "Artic Water", pris: 56, beskrivelse: "" },
     { navn: "Kaffe / Te", pris: 46, beskrivelse: "" },
     { navn: "Cappuccino", pris: 59, beskrivelse: "inneholder melk" },
     { navn: "Café Latte", pris: 59, beskrivelse: "inneholder melk" },
@@ -590,10 +560,7 @@ const MENY = {
     { navn: "Varm sjokolade", pris: 59, beskrivelse: "inneholder melk" },
     { navn: "Varm sjokolade m/krem", pris: 59, beskrivelse: "inneholder melk" },
     { navn: "Espresso", pris: 45, beskrivelse: "" },
-    { navn: "Dobbel espresso", pris: 69, beskrivelse: "" }
-  ],
-
-  "Øl/Cider": [
+    { navn: "Dobbel espresso", pris: 69, beskrivelse: "" },
     { navn: "Hansa 0,5 L", pris: 98, beskrivelse: "" },
     { navn: "Hansa 0,33 L", pris: 84, beskrivelse: "" },
     { navn: "Heineken 0,33 L", pris: 129, beskrivelse: "flaske" },
@@ -607,10 +574,7 @@ const MENY = {
     { navn: "Cider (pære)", pris: 229, beskrivelse: "" },
     { navn: "Bulmers", pris: 149, beskrivelse: "" },
     { navn: "Clausthaler", pris: 79, beskrivelse: "flaske, alkoholfri" },
-    { navn: "Heineken 0.0%", pris: 79, beskrivelse: "flaske, alkoholfri" }
-  ],
-
-  "Rødvin": [
+    { navn: "Heineken 0.0%", pris: 79, beskrivelse: "flaske, alkoholfri" },
     { navn: "Husets rødvin (glass)", pris: 139, beskrivelse: "" },
     { navn: "Husets rødvin (flaske)", pris: 589, beskrivelse: "" },
     { navn: "Grimaldi Barbera d'Alba", pris: 774, beskrivelse: "" },
@@ -618,10 +582,7 @@ const MENY = {
     { navn: "Masi Venezia", pris: 699, beskrivelse: "Italia" },
     { navn: "Barbera Piemonte", pris: 699, beskrivelse: "Italia" },
     { navn: "Montepulciano D'Abruzzo", pris: 699, beskrivelse: "Italia" },
-    { navn: "Amarone Della Valpolicella", pris: 869, beskrivelse: "Italia" }
-  ],
-
-  "Hvitvin": [
+    { navn: "Amarone Della Valpolicella", pris: 869, beskrivelse: "Italia" },
     { navn: "Husets hvitvin (glass)", pris: 139, beskrivelse: "" },
     { navn: "Husets hvitvin (flaske)", pris: 589, beskrivelse: "" },
     { navn: "Masi", pris: 699, beskrivelse: "Italia, tørr" },
