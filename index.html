@@ -48,7 +48,8 @@
   --verde-2:#828B74;      /* mørkere salvia – striper/kort */
   --verde-line:#6C7560;   /* linjer på salvia */
   --verde-dyp:#465140;    /* dyp salvia – overskrifter/aktive flater */
-  --carta:#FBF7EE;        /* papir – menykortet */
+  --carta:#FBF7EE;        /* papir – knappetekst m.m. */
+  --carta-verde:#C1C7A9;  /* dempet salvie-papir – menykortet (mørkere) */
   --carta-dim:#F1E9D8;    /* papir, dempet */
   --inchiostro:#262D20;   /* mørk grønnsvart tekst */
   --pomodoro:#D9721E;      /* oransje aksent (justert for lys bunn) */
@@ -174,7 +175,7 @@ section{padding:90px 20px}
 /* ---------- MENY (papirkortet – signaturen) ---------- */
 #meny{padding-top:70px}
 .menu-card{
-  background:var(--carta);color:var(--inchiostro);
+  background:var(--carta-verde);color:var(--inchiostro);
   border-radius:4px;padding:clamp(28px,5vw,64px);
   box-shadow:0 26px 60px rgba(38,45,32,.28);
   position:relative;
@@ -219,7 +220,7 @@ section{padding:90px 20px}
 .dish-line{display:flex;align-items:baseline;gap:10px}
 .dish-name{font-family:'Marcellus',serif;font-size:1.06rem;color:var(--verde-dyp);white-space:normal}
 .dish-dots{flex:1;border-bottom:2px dotted rgba(34,48,42,.35);transform:translateY(-4px);min-width:24px}
-.dish-price{font-family:'Marcellus',serif;font-size:1.02rem;color:var(--pomodoro);white-space:nowrap}
+.dish-price{font-family:'Marcellus',serif;font-size:1.02rem;color:#9C4116;white-space:nowrap}
 .dish-desc{font-family:'Spectral',serif;font-size:.92rem;color:#5E564A;margin-top:3px}
 .dish-tags{margin-top:6px;display:flex;gap:8px;flex-wrap:wrap}
 .tag{
