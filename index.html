@@ -255,6 +255,10 @@ section{padding:90px 20px}
   body.printing-menu{background:#fff !important}
   body.printing-menu #printMeny{display:block;color:#1c1c1c;background:#fff;font-family:'Spectral',serif;font-size:10pt;line-height:1.3}
   #printMeny *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .pm-page{break-after:page}
+  .pm-page:last-child{break-after:auto}
+  .pm-head.small h1{font-size:18pt}
+  .pm-head.small{padding-bottom:3mm}
   .pm-head{text-align:center;border-bottom:1.2pt solid #465140;padding-bottom:5mm;margin-bottom:4mm}
   .pm-head h1{font-family:'Marcellus',serif;font-weight:400;font-size:27pt;letter-spacing:.06em;color:#465140;margin:0}
   .pm-head p{font-family:'Karla',sans-serif;font-size:8.5pt;letter-spacing:.1em;text-transform:uppercase;color:#555;margin:2mm 0 0}
@@ -534,8 +538,9 @@ footer p{font-size:.8rem;color:var(--sabbia);letter-spacing:.06em}
    Restauranten oppdaterer menyen selv i et vanlig regneark:
 
    1. Opprett et Google Sheet med kolonnene (rad 1, nøyaktig disse navnene):
-        Kategori | Navn | Pris | Beskrivelse | Allergener | Merk
-      (Allergener og Merk er valgfrie kolonner)
+        Kategori | Navn | Pris | Beskrivelse | Allergener | Merk | Gruppe
+      (Allergener, Merk og Gruppe er valgfrie kolonner. Gruppe brukes bare
+       til å dele Drikke i Øl, Rødvin, Hvitvin, Brus, Kaffe på utskriften.)
       Eksempelrad:
         Pizza | 3. Casa Mia | 259 | crème fraîche, ost, … | valnøtter, melk | Anbefalt
       Flere merker skilles med semikolon: Anbefalt; Inneholder nøtter
@@ -709,9 +714,26 @@ function renderGrid(){
 searchEl.addEventListener('input', renderGrid);
 
 /* ---- Utskrift / PDF: bygger en hvit meny av MENY (alltid oppdatert) ---- */
+/* Drikke deles i grupper: kolonnen «Gruppe» (valgfri) styrer, ellers brukes kjente startpunkter.
+   Nye rader arver gruppen til raden over. */
+const DRIKKE_START = {
+  'Hansa 0,5 L': 'Øl og cider', 'Husets rødvin (glass)': 'Rødvin',
+  'Husets hvitvin (glass)': 'Hvitvin', 'Coca Cola 0,35 L': 'Brus og mineralvann',
+  'Kaffe / Te': 'Kaffe og varm drikke'
+};
+function drikkeGrupper(items){
+  const out = []; let cur = null;
+  items.forEach(d => {
+    if (d.gruppe) cur = d.gruppe; else if (DRIKKE_START[d.navn]) cur = DRIKKE_START[d.navn];
+    const navn = cur || 'Drikke';
+    let g = out.find(x => x.navn === navn);
+    if (!g){ g = { navn, items: [] }; out.push(g); }
+    g.items.push(d);
+  });
+  return out;
+}
 function buildPrintMenu(){
   const note = (document.querySelector('.menu-note') || {}).textContent || '';
-  const cats = Object.keys(MENY).filter(k => MENY[k].length);
   const dish = d => {
     const tags = (d.merk || []).map(t => t === 'Anbefalt' ? '★ Anbefalt' : t).join(' · ');
     return `<div class="pm-dish">
@@ -721,13 +743,29 @@ function buildPrintMenu(){
       ${tags ? `<p class="pm-meta">${esc(tags)}</p>` : ''}
     </div>`;
   };
-  return `<div class="pm-head">
+  const sec = (title, items) => `<div class="pm-sec"><h2>${esc(title)}</h2><div class="pm-cols">${items.map(dish).join('')}</div></div>`;
+  // Side 1: mat · Side 2: alkohol · Side 3: brus, kaffe og dessert
+  const sider = [[], [], []];
+  Object.keys(MENY).filter(k => MENY[k].length).forEach(k => {
+    if (/^drikke/i.test(k)){
+      drikkeGrupper(MENY[k]).forEach(g =>
+        sider[/øl|cider|vin|alkohol/i.test(g.navn) ? 1 : 2].push(sec(g.navn, g.items)));
+    } else if (/dessert|snack|kaffe|kake/i.test(k)){
+      sider[2].push(sec(k, MENY[k]));
+    } else {
+      sider[0].push(sec(k, MENY[k]));
+    }
+  });
+  const side = (html, i) => `<div class="pm-page">
+    <div class="pm-head${i ? ' small' : ''}">
       <h1>Café Di Roma</h1>
-      <p>Italiensk pizza · Sofienberggata 6, 0551 Oslo · Tlf. 22 37 64 44</p>
+      ${i ? '' : '<p>Italiensk pizza · Sofienberggata 6, 0551 Oslo · Tlf. 22 37 64 44</p>'}
     </div>
     ${note ? `<p class="pm-note">${esc(note)}</p>` : ''}
-    ${cats.map(c => `<div class="pm-sec"><h2>${esc(c)}</h2><div class="pm-cols">${MENY[c].map(dish).join('')}</div></div>`).join('')}
-    <div class="pm-foot">Priser i NOK · cafediroma.no</div>`;
+    ${html}
+    <div class="pm-foot">Priser i NOK · cafediroma.no</div>
+  </div>`;
+  return sider.map((s, i) => s.length ? side(s.join(''), i) : '').join('');
 }
 function skrivUtMeny(){
   const el = document.getElementById('printMeny');
@@ -770,7 +808,7 @@ async function lastEksternMeny(){
     const header = rows[0].map(h => h.trim().toLowerCase());
     const col = name => header.indexOf(name);
     const iKat = col('kategori'), iNavn = col('navn'), iPris = col('pris'),
-          iBesk = col('beskrivelse'), iMerk = col('merk'), iAll = col('allergener');
+          iBesk = col('beskrivelse'), iMerk = col('merk'), iAll = col('allergener'), iGr = col('gruppe');
     if (iKat < 0 || iNavn < 0 || iPris < 0) return;
     const ny = {};
     for (const r of rows.slice(1)){
@@ -782,6 +820,8 @@ async function lastEksternMeny(){
       const merk = (iMerk >= 0 ? r[iMerk] || '' : '').split(';').map(s => s.trim()).filter(Boolean);
       const all = (iAll >= 0 ? r[iAll] || '' : '').trim();
       if (all) rett.allergener = all;
+      const gr = (iGr >= 0 ? r[iGr] || '' : '').trim();
+      if (gr) rett.gruppe = gr;
       if (merk.length) rett.merk = merk;
       (ny[kat] = ny[kat] || []).push(rett);
     }
