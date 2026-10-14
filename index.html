@@ -761,7 +761,7 @@ function buildPrintMenu(){
       <h1>Café Di Roma</h1>
       ${i ? '' : '<p>Italiensk pizza · Sofienberggata 6, 0551 Oslo · Tlf. 22 37 64 44</p>'}
     </div>
-    ${note ? `<p class="pm-note">${esc(note)}</p>` : ''}
+    ${note && !i ? `<p class="pm-note">${esc(note)}</p>` : ''}
     ${html}
     <div class="pm-foot">Priser i NOK · cafediroma.no</div>
   </div>`;
