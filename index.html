@@ -228,6 +228,8 @@ section{padding:90px 20px}
   font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;
   padding:3px 9px;border-radius:2px;border:1px solid rgba(34,48,42,.25);color:#6B6152;
 }
+.dish-allergy{margin-top:5px;font-family:'Karla',sans-serif;font-size:.78rem;color:#6B6152}
+.dish-allergy b{font-weight:700;letter-spacing:.04em}
 .tag.rec{background:var(--pomodoro);border-color:var(--pomodoro);color:var(--carta)}
 .menu-empty{
   grid-column:1/-1;text-align:center;padding:40px 0;
@@ -499,9 +501,10 @@ footer p{font-size:.8rem;color:var(--sabbia);letter-spacing:.06em}
    Restauranten oppdaterer menyen selv i et vanlig regneark:
 
    1. Opprett et Google Sheet med kolonnene (rad 1, nøyaktig disse navnene):
-        Kategori | Navn | Pris | Beskrivelse | Merk
+        Kategori | Navn | Pris | Beskrivelse | Allergener | Merk
+      (Allergener og Merk er valgfrie kolonner)
       Eksempelrad:
-        Pizza | 1. Margherita | 189 | tomatsaus, ost, fersk oregano | Anbefalt
+        Pizza | 3. Casa Mia | 259 | crème fraîche, ost, … | valnøtter, melk | Anbefalt
       Flere merker skilles med semikolon: Anbefalt; Inneholder nøtter
 
    2. I regnearket: Fil → Del → Publiser på nettet →
@@ -513,9 +516,11 @@ footer p{font-size:.8rem;color:var(--sabbia);letter-spacing:.06em}
 
    Endringer i regnearket vises på siden innen ca. 5 minutter
    (Googles publiseringsbuffer). Rader uten Kategori, Navn eller
-   gyldig Pris hoppes over – et stavefeil kan aldri knekke siden.
+   gyldig Pris hoppes over. Har regnearket færre enn 20 retter,
+   brukes reservemenyen (vern mot utilsiktet sletting).
+   Regnearket er kundens ansvar – siden viser nøyaktig det som står der.
    ========================================================= */
-const SHEET_CSV_URL = "";
+const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRrW89vIMtGsNxUmR8N_KmamFi4_Sq3AthnQ20pAhAHpr1e8K-2i_RicYoYHgb-G-iGDfLOnXdhVcrc/pub?output=csv";
 
 /* =========================================================
    RESERVEMENY – brukes når SHEET_CSV_URL står tom eller
@@ -528,52 +533,34 @@ const MENY = {
   "Pizza": [
     { navn: "1. Margherita", pris: 189, beskrivelse: "tomatsaus, ost, fersk oregano" },
     { navn: "2. Calzone med ost og skinke", pris: 249, beskrivelse: "innbakt · tomatsaus, ost, skinke, løk" },
-    { navn: "3. Casa Mia", pris: 259, beskrivelse: "crème fraîche, ost, parmaskinke, gorgonzola, valnøtter, parmesan, ruccola", merk: ["Inneholder valnøtter"] },
+    { navn: "3. Casa Mia", pris: 259, beskrivelse: "crème fraîche, ost, parmaskinke, gorgonzola, valnøtter, parmesan, ruccola", allergener: "valnøtter" },
     { navn: "4. Quattro Formaggi", pris: 259, beskrivelse: "tomatsaus eller crème fraîche, ost, gorgonzolaost, fersk mozzarella, parmesan" },
     { navn: "5. La Bomba", pris: 249, beskrivelse: "tomatsaus, ost, pepperoni, hvitløk, chili, kapers", merk: ["Anbefalt"] },
     { navn: "6. Roma Spesial", pris: 269, beskrivelse: "tomatsaus, ost, skinke, champignon, løk, biff, salami" },
     { navn: "7. Mafiosa", pris: 249, beskrivelse: "tomatsaus, ost, marinert biff, paprika, løk, champignon", merk: ["Øl som passer: Nøgne Ø IPA"] },
     { navn: "8. Pizza Pollo", pris: 249, beskrivelse: "tomatsaus, ost, pestokylling, løk, paprika, ruccola", merk: ["Øl som passer: Nøgne Ø IPA"] },
-    { navn: "9. Marinara", pris: 259, beskrivelse: "tomatsaus eller crème fraîche, mozzarella, ansjos, reker, oliven, hvitløk", merk: ["Inneholder skalldyr og fisk"] }
+    { navn: "9. Marinara", pris: 259, beskrivelse: "tomatsaus eller crème fraîche, mozzarella, ansjos, reker, oliven, hvitløk", allergener: "skalldyr og fisk" },
+    { navn: "10. Romana", pris: 259, beskrivelse: "tomatsaus, ost, skinke, oregano" }
   ],
   "Gourmet pizza": [
     { navn: "Diavola Doc", pris: 279, beskrivelse: "tomatsaus, mozzarella, sterk salami, chili, honning" },
     { navn: "Tartufo", pris: 279, beskrivelse: "mozzarella, stekt sopp, trøffelsalami, trøffelsaus" },
-    { navn: "Pistasjo", pris: 279, beskrivelse: "mozzarella, salsiccia, pistasjpesto, pistasjnøtter", merk: ["Inneholder nøtter"] },
+    { navn: "Pistasjo", pris: 279, beskrivelse: "mozzarella, salsiccia, pistasjpesto, pistasjnøtter", allergener: "nøtter" },
     { navn: "Fungi", pris: 279, beskrivelse: "hvit trøffelsaus, mozzarella, blandet sopp" },
-    { navn: "Café Di Roma special", pris: 279, beskrivelse: "hvit bunn, mozzarella, jordskokk, burrata, pistasjnøtter, sitronskall", merk: ["Inneholder nøtter"] }
+    { navn: "Café Di Roma special", pris: 289, beskrivelse: "hvit bunn, mozzarella, burrata, mortadella, pistasjnøtter, sitronskall", allergener: "nøtter" }
+  ],
+  "Salat": [
+    { navn: "Caprese con Burrata", pris: 259, beskrivelse: "tomatconfit, fersk basilikum og balsamicoglasur, brød, servert med burrata", allergener: "melk" },
+    { navn: "Insalata di Pollo", pris: 259, beskrivelse: "kylling, rødløk, cherrytomat, oliven, olje, brød" }
   ],
   "Ekstra": [
-    { navn: "Ekstra ost", pris: 35, beskrivelse: "inneholder melk" },
+    { navn: "Ekstra ost", pris: 35, beskrivelse: "", allergener: "melk" },
     { navn: "Ekstra kjøtt", pris: 50, beskrivelse: "" },
-    { navn: "Dressing", pris: 35, beskrivelse: "inneholder melk" },
+    { navn: "Dressing", pris: 35, beskrivelse: "", allergener: "melk" },
     { navn: "Grønnsaker", pris: 30, beskrivelse: "" },
     { navn: "Glutenfri bunn", pris: 68, beskrivelse: "" }
   ],
-  "Salat": [
-    { navn: "Caprese con Burrata", pris: 259, beskrivelse: "tomatconfit, fersk basilikum og balsamicoglasur, brød, servert med burrata", merk: ["Inneholder melk"] },
-    { navn: "Insalata di Pollo", pris: 259, beskrivelse: "kylling, rødløk, cherrytomat, oliven, olje, brød" }
-  ],
   "Drikke": [
-    { navn: "Coca Cola 0,35 L", pris: 59, beskrivelse: "" },
-    { navn: "Coca Cola Zero 0,35 L", pris: 59, beskrivelse: "" },
-    { navn: "Fanta 0,35 L", pris: 59, beskrivelse: "" },
-    { navn: "Olden 0,35 L", pris: 59, beskrivelse: "" },
-    { navn: "Olden Lemon 0,35 L", pris: 59, beskrivelse: "" },
-    { navn: "Eplemost 0,35 L", pris: 59, beskrivelse: "" },
-    { navn: "Appelsinjuice 0,35 L", pris: 59, beskrivelse: "" },
-    { navn: "Ice Tea", pris: 72, beskrivelse: "" },
-    { navn: "Kuli", pris: 39, beskrivelse: "eple, jordbær eller appelsin" },
-    { navn: "Artic Water", pris: 56, beskrivelse: "" },
-    { navn: "Kaffe / Te", pris: 46, beskrivelse: "" },
-    { navn: "Cappuccino", pris: 59, beskrivelse: "inneholder melk" },
-    { navn: "Café Latte", pris: 59, beskrivelse: "inneholder melk" },
-    { navn: "Café Mocca", pris: 59, beskrivelse: "inneholder melk" },
-    { navn: "Café Cortado", pris: 59, beskrivelse: "inneholder melk" },
-    { navn: "Varm sjokolade", pris: 59, beskrivelse: "inneholder melk" },
-    { navn: "Varm sjokolade m/krem", pris: 59, beskrivelse: "inneholder melk" },
-    { navn: "Espresso", pris: 45, beskrivelse: "" },
-    { navn: "Dobbel espresso", pris: 69, beskrivelse: "" },
     { navn: "Hansa 0,5 L", pris: 98, beskrivelse: "" },
     { navn: "Hansa 0,33 L", pris: 84, beskrivelse: "" },
     { navn: "Heineken 0,33 L", pris: 129, beskrivelse: "flaske" },
@@ -583,7 +570,7 @@ const MENY = {
     { navn: "Nøgne Ø Blond", pris: 129, beskrivelse: "" },
     { navn: "Weihenstephaner", pris: 159, beskrivelse: "" },
     { navn: "Sol", pris: 129, beskrivelse: "" },
-    { navn: "Cider (pære)", pris: 229, beskrivelse: "" },
+    { navn: "Cider (pære)", pris: 119, beskrivelse: "" },
     { navn: "Bulmers", pris: 149, beskrivelse: "" },
     { navn: "Clausthaler", pris: 79, beskrivelse: "flaske, alkoholfri" },
     { navn: "Heineken 0.0%", pris: 79, beskrivelse: "flaske, alkoholfri" },
@@ -599,7 +586,30 @@ const MENY = {
     { navn: "Husets hvitvin (flaske)", pris: 589, beskrivelse: "" },
     { navn: "Masi", pris: 699, beskrivelse: "Italia, tørr" },
     { navn: "Chardonnay", pris: 699, beskrivelse: "Italia, tørr" },
-    { navn: "Chablis Val De Mercy", pris: 799, beskrivelse: "Frankrike" }
+    { navn: "Chablis Val De Mercy", pris: 799, beskrivelse: "Frankrike" },
+    { navn: "Coca Cola 0,35 L", pris: 59, beskrivelse: "" },
+    { navn: "Coca Cola Zero 0,35 L", pris: 59, beskrivelse: "" },
+    { navn: "Fanta 0,35 L", pris: 59, beskrivelse: "" },
+    { navn: "Olden 0,35 L", pris: 59, beskrivelse: "" },
+    { navn: "Olden Lemon 0,35 L", pris: 59, beskrivelse: "" },
+    { navn: "Eplemost 0,35 L", pris: 59, beskrivelse: "" },
+    { navn: "Appelsinjuice 0,35 L", pris: 59, beskrivelse: "" },
+    { navn: "Ice Tea", pris: 72, beskrivelse: "" },
+    { navn: "Kuli", pris: 39, beskrivelse: "eple, jordbær eller appelsin" },
+    { navn: "Artic Water", pris: 56, beskrivelse: "" },
+    { navn: "Kaffe / Te", pris: 46, beskrivelse: "" },
+    { navn: "Espresso", pris: 45, beskrivelse: "" },
+    { navn: "Dobbel espresso", pris: 69, beskrivelse: "" },
+    { navn: "Cappuccino", pris: 59, beskrivelse: "", allergener: "melk" },
+    { navn: "Café Latte", pris: 59, beskrivelse: "", allergener: "melk" },
+    { navn: "Café Mocca", pris: 59, beskrivelse: "", allergener: "melk" },
+    { navn: "Café Cortado", pris: 59, beskrivelse: "", allergener: "melk" },
+    { navn: "Varm sjokolade", pris: 59, beskrivelse: "", allergener: "melk" },
+    { navn: "Varm sjokolade m/krem", pris: 59, beskrivelse: "", allergener: "melk" }
+  ],
+  "Desserter": [
+    { navn: "Tiramisu", pris: 129, beskrivelse: "" },
+    { navn: "Jordbær-ostekake", pris: 129, beskrivelse: "" }
   ]
 };
 
@@ -644,6 +654,7 @@ function dishHTML(d){
       <span class="dish-price">${esc(d.pris)} kr</span>
     </div>
     ${d.beskrivelse ? `<p class="dish-desc">${esc(d.beskrivelse)}</p>` : ''}
+    ${d.allergener ? `<p class="dish-allergy"><b>Allergener:</b> ${esc(d.allergener)}</p>` : ''}
     ${tags ? `<div class="dish-tags">${tags}</div>` : ''}
   </div>`;
 }
@@ -694,7 +705,7 @@ async function lastEksternMeny(){
     const header = rows[0].map(h => h.trim().toLowerCase());
     const col = name => header.indexOf(name);
     const iKat = col('kategori'), iNavn = col('navn'), iPris = col('pris'),
-          iBesk = col('beskrivelse'), iMerk = col('merk');
+          iBesk = col('beskrivelse'), iMerk = col('merk'), iAll = col('allergener');
     if (iKat < 0 || iNavn < 0 || iPris < 0) return;
     const ny = {};
     for (const r of rows.slice(1)){
@@ -704,10 +715,12 @@ async function lastEksternMeny(){
       if (!kat || !navn || !isFinite(pris)) continue;   // ufullstendige rader hoppes over
       const rett = { navn, pris, beskrivelse: (iBesk >= 0 ? r[iBesk] || '' : '').trim() };
       const merk = (iMerk >= 0 ? r[iMerk] || '' : '').split(';').map(s => s.trim()).filter(Boolean);
+      const all = (iAll >= 0 ? r[iAll] || '' : '').trim();
+      if (all) rett.allergener = all;
       if (merk.length) rett.merk = merk;
       (ny[kat] = ny[kat] || []).push(rett);
     }
-    if (!Object.keys(ny).length) return;                // tomt ark → behold reservemenyen
+    if (Object.values(ny).reduce((s, a) => s + a.length, 0) < 20) return;                // tomt ark → behold reservemenyen
     Object.keys(MENY).forEach(k => delete MENY[k]);
     Object.assign(MENY, ny);
     activeCat = null;
